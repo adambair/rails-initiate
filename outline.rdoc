@@ -164,7 +164,7 @@ You can use the version of Ruby that is included with OSX but I find that it mak
 
     ruby script/generate #=> will list all available generators
 
-* Creating a Scaffold
+=== Creating a Scaffold
 A Scaffold will create all views, models, controllers, routes, and migrations for a resource
 
     ruby script/generate scaffold #=> will explain what the generator does
@@ -172,16 +172,16 @@ A Scaffold will create all views, models, controllers, routes, and migrations fo
     ruby script/generate scaffold Post title:string body:text
       # the title/body arguments are what populate your migration
 
-* Running a migration
+=== Running a migration
 After you create a scaffold you'll need to run the migration to create the proper table and fields within your database.
 
     rake db:migrate   #=> run all new migrations on the development database
 
-* Reversing a migration
+=== Reversing a migration
 
     rake db:rollback  #=> undo the last migration
 
-* NEVER MODIFY OLD MIGRATIONS
+=== NEVER MODIFY OLD MIGRATIONS
   - this will caus headaches for other developers and for deployments
   - migrations will only run the newest migrations
   - old migrations are never run again unless you go all the way back down
@@ -189,7 +189,7 @@ After you create a scaffold you'll need to run the migration to create the prope
   - if you need to change something in the database, make a new migration
   - modifying old migrations will bite you sooner or later
 
-* Removing a Scaffold
+=== Removing a Scaffold
 If you have run migrations from a scaffold, you need to rollback your migration before deleting the scaffold (which will also delete the migration)
 
     rake db:rollback

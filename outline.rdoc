@@ -137,24 +137,24 @@ You can use the version of Ruby that is included with OSX but I find that it mak
 
 === Structure of a Rails applicatoin
 
-      app     #=> models, views, controllers, helpers, app logic
-      config  #=> database, environment configuration, routes
-      db      #=> migrations, schema.rb
-      doc     #=> a place for your app's documentation
-      lib     #=> library files, rake tasks, code that doesn't fit in the app/* folders
-      log     #=> log files for all of your environments (prod, dev, test)
-      public  #=> accessable to everyone, images, javascript, stylesheets, static pages
-      script  #=> console, server, generators
-      spec    #=> rspec tests/specifications and configuration
-      test    #=> built in test suite Test::Unit
-      tmp     #=> sessions, cache, etc
-      vendor  #=> 3rd party code, plugins, gems, vendored rails
+    app     #=> models, views, controllers, helpers, app logic
+    config  #=> database, environment configuration, routes
+    db      #=> migrations, schema.rb
+    doc     #=> a place for your app's documentation
+    lib     #=> library files, rake tasks, code that doesn't fit in the app/* folders
+    log     #=> log files for all of your environments (prod, dev, test)
+    public  #=> accessable to everyone, images, javascript, stylesheets, static pages
+    script  #=> console, server, generators
+    spec    #=> rspec tests/specifications and configuration
+    test    #=> built in test suite Test::Unit
+    tmp     #=> sessions, cache, etc
+    vendor  #=> 3rd party code, plugins, gems, vendored rails
 
 === Starting a Rails application
-
-      ruby script/server  #=> start app in dev mode at http://localhost:3000
-      ruby script/server -p 4000 #=> starts the app at http://localhost:4000
-      ruby script/server -e production #=> start the application in production mode
+    
+    ruby script/server  #=> start app in dev mode at http://localhost:3000
+    ruby script/server -p 4000 #=> starts the app at http://localhost:4000
+    ruby script/server -e production #=> start the application in production mode
 
 === Generators
 * Generators will allow you to rapidly add baseline functionality to a Rails application
@@ -165,27 +165,15 @@ You can use the version of Ruby that is included with OSX but I find that it mak
     ruby script/generate #=> will list all available generators
 
 * Creating a Scaffold
+A Scaffold will create all views, models, controllers, routes, and migrations for a resource
 
     ruby script/generate scaffold #=> will explain what the generator does
 
     ruby script/generate scaffold Post title:string body:text
-      # Create all views, models, controllers, routes, and migrations for a resource
       # the title/body arguments are what populate your migration
 
-* Removing a Scaffold
-
-    ruby script/destroy scaffold Post
-
-=== Lab 02: Create a Post Resource [ 02_create_a_post_resource.rb ]
-* Use the scaffold generator to create a Post resource
-* The Post should have a title, body, and author fields
-* Start your application and explore the freshly minted scaffold
-
-* Migrations
-
-    ruby script/generate migration some_migration_name
-
 * Running a migration
+After you create a scaffold you'll need to run the migration to create the proper table and fields within your database.
 
     rake db:migrate   #=> run all new migrations on the development database
 
@@ -201,6 +189,38 @@ You can use the version of Ruby that is included with OSX but I find that it mak
   - if you need to change something in the database, make a new migration
   - modifying old migrations will bite you sooner or later
 
+* Removing a Scaffold
+If you have run migrations from a scaffold, you need to rollback your migration before deleting the scaffold (which will also delete the migration)
+
+    rake db:rollback
+    ruby script/destroy scaffold Post
+
+=== Lab 02: Create a Post Resource [ 02_create_a_post_resource.rb ]
+* Use the scaffold generator to create a Post resource
+* The Post should have a title, body, and author fields
+* Use rake to migrate your database
+* Start your application and explore the freshly minted scaffold
+
+=== Rake
+rake (Ruby make) is a tool to run 'tasks' such as migrations, tests, etc
+
+* Rake tasks are simply specialized Ruby files
+* All the code within a task is Ruby
+
+* Rake tasks are usually loosly related utility tasks that are not required during the normal run of your application. Examples:
+  - Data imports
+  - Data conversions
+  - Rotating logs
+  - Running tests
+  - Running migrations
+  - Running code metrics
+
+* You can list all rake tasks associated with an application by using '-T'
+
+    rake -T       #=> list all tasks in an application
+    rake -T db    #=> list all tasks with 'db' in the name
+    rake -t test  #=> list all tasks with 'test' in the name
+
 === Console
 * The Rails Console is like irb but within the context of your Rails application
 * You can access any part of your application through the console
@@ -208,12 +228,26 @@ You can use the version of Ruby that is included with OSX but I find that it mak
 
     ruby script/console
 
-=== Rake
+=== Routes
+* Routes live in config/routes.rb
+* This is where you specify what actions are available for your application
 
-    rake (Ruby make) is a tool to run 'tasks' such as migrations, tests, etc
-      - rake db:migrate
-      - rake test
-      - rake spec
+    map.resources :posts
+    # generate all routes for the posts_controller
+    # localhost:3000/posts
+
+    map.root => :controller_name, :action => :action_name
+    # change the default route for your application to point at the specified location
+    # make sure to delete public/index.html for the root route to be functional
+
+=== Display all available routes
+
+    rake routes
+    # display all routes available to your application
+
+=== Lab 03: Remove Default Rails Page [ 03_remove_default_rails_page.rb ]
+* Remove the default Rails landing page (Welcome to Rails)
+* Create a route that will display all of your Posts at localhost:3000/
 
 === Models
 

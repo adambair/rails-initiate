@@ -2,7 +2,7 @@
 
 Past instructors include Adam Bair and Joe Grossberg
 
-== Description
+=== Description
 This course is designed to introduce you to the basics of Ruby on Rails.
 
 === Installfest
@@ -100,40 +100,11 @@ You can use the version of Ruby that is included with OSX but I find that it mak
 * The instructions should be about the same as OSX
 * Just substitute Macports with the package manager of your choice
 
-=== Concepts
+=== Creating a New Rails Application
+* The 'rails some_name' will create a new directory called 'some_name'
+* It will then build out the basic framework in which you can build your application
 
-* DRY - Don't Repeat Yourself
-  avoid duplicated code - extract duplicate code into a single method
-
-* COC - Convention over Configuration
-  - many of the small decisions have already been made for you
-  - COC allows you to focus on the problem domain of your application instead of worrying about where code will live, how things will be named, etc
-
-* MVC - Model, View, Controller
-  - an architecture style that separates concerns of data/logic, action/request, and presentation
-
-  View
-    - User sees this level
-    - html, markup, js, css, forms
-
-  Models
-    - business logic
-    - database interaction
-    - the bulk of your application logic
-    - MAXIMUM FUNCTIONALITY
-
-  Controller
-    - brokers data between the Model and View
-    - MINIMUM FUNCTIONALITY
-
-* Fat Model, Skinny Controller
-  - keep all of your logic in your model
-
-=== Lab 01: Create a Rails Application [ 01_create_a_rails_application.rb ]
-* Use the 'rails' command to create a new application callled 'blog'
-* Test your application by running 'ruby script/server' in the blog folder
-* View your application in a web browser
-* Explore the directory structure of your newly created application
+    rails name_of_application
 
 === Structure of a Rails applicatoin
 
@@ -156,8 +127,15 @@ You can use the version of Ruby that is included with OSX but I find that it mak
     ruby script/server -p 4000 #=> starts the app at http://localhost:4000
     ruby script/server -e production #=> start the application in production mode
 
+=== Lab 01: Create a Rails Application [ 01_create_a_rails_application.rb ]
+* Use the 'rails' command to create a new application callled 'blog'
+* Test your application by running 'ruby script/server' in the blog folder
+* View your application in a web browser
+* Explore the directory structure of your newly created application
+
 === Generators
-* Generators will allow you to rapidly add baseline functionality to a Rails application
+Generators will allow you to rapidly add baseline functionality to a Rails application
+
 * There are built in generators that come with rails
 * There are also custom generators provided by 3rd party libraries
 * Once you're comfortable with Ruby and Rails you can evne create your own
@@ -182,12 +160,12 @@ After you create a scaffold you'll need to run the migration to create the prope
     rake db:rollback  #=> undo the last migration
 
 === NEVER MODIFY OLD MIGRATIONS
-  - this will caus headaches for other developers and for deployments
-  - migrations will only run the newest migrations
-  - old migrations are never run again unless you go all the way back down
-  - think of migrations as 'run once' operations
-  - if you need to change something in the database, make a new migration
-  - modifying old migrations will bite you sooner or later
+  - This will caus headaches for other developers and for deployments
+  - 'rake db:migrate' will only run the newest migrations
+  - Old migrations are never run again unless you go all the way back down
+  - Think of migrations as 'run once' operations
+  - If you need to change something in the database, make a new migration
+  - Modifying old migrations will bite you sooner or later
 
 === Removing a Scaffold
 If you have run migrations from a scaffold, you need to rollback your migration before deleting the scaffold (which will also delete the migration)
@@ -250,25 +228,60 @@ rake (Ruby make) is a tool to run 'tasks' such as migrations, tests, etc
 * Create a route that will display all of your Posts at localhost:3000/
 
 === Models
+Models interact with the database and contain the logic for your application
 
-    interact with the database and contain the logic for your application
-    this is where the business logic should live
-    all of the data associations and validations live here
-      - validation examples
-          http://ar.rubyonrails.org/classes/ActiveRecord/Validations/ClassMethods.html
-      - association examples
-          http://api.rubyonrails.org/classes/ActiveRecord/Associations/ClassMethods.html
-      - customize validation messages using
-          validates_presence_of :name, :message => 'custom message'
-    has_many / belongs_to
-      - two halves of a single relationship
-      - the belongs_to side of the association is where the foriegn key is located
-    you can create SEO-friendly links by using to_param
+* Models are Ruby classes that descend from ActiveRecord::Base
 
-       def to_param
-        "#{id}-#{name.gsub(' ','-')}"
-       end
+* ActiveRecord is an ORM that provides all database functionality
+    
+* Question: What is an ORM?
 
+    ORM stands for Object Relational Mapper
+    It maps SQL statements to code and objects
+    It essentially translates code into SQL statments
+
+* This is where the business logic should live
+
+* All of the data associations and validations live here
+  - validation examples
+      http://ar.rubyonrails.org/classes/ActiveRecord/Validations/ClassMethods.html
+  - association examples
+      http://api.rubyonrails.org/classes/ActiveRecord/Associations/ClassMethods.html
+  - customize validation messages using
+      validates_presence_of :name, :message => 'custom message'
+
+=== ActiveRecord Relationships: has_many / belongs_to
+* Two halves of a single relationship
+* The belongs_to side of the association is where the foriegn key is located
+
+    class Author
+      has_many :books
+    end
+
+    class Book
+      belongs_to :author
+    end
+
+* The argument for belongs_to is singular while has_many's is plural
+* This relationship hinges upon a field in the book table 'author_id'
+* ActiveRecord assumes that this field exists
+* The x_id assumes that x is the lowercase classname of the relationship ex:
+
+    class Student
+      has_many :books
+    end
+
+    class Book
+      belongs_to :student
+    end
+
+    # the books table would need to have a student_id field
+
+=== Lab 04: Create a Comment Resource [ 04_create_a_comment_resource.rb ]
+* Use scaffolding to create a Comment resource with author and body fields
+* Extra Credit: Don't use scaffolding (generators are allowed)
+* Verify your new resource in a browser
+ 
 === Controllers
 
     handle all of the requests to your application
@@ -366,6 +379,35 @@ rake (Ruby make) is a tool to run 'tasks' such as migrations, tests, etc
 
     resource routes - http://api.rubyonrails.org/classes/ActionController/Resources.html
     standard routes - http://api.rubyonrails.org/classes/ActionController/Routing.html
+
+=== Concepts
+
+* DRY - Don't Repeat Yourself
+  avoid duplicated code - extract duplicate code into a single method
+
+* COC - Convention over Configuration
+  - many of the small decisions have already been made for you
+  - COC allows you to focus on the problem domain of your application instead of worrying about where code will live, how things will be named, etc
+
+* MVC - Model, View, Controller
+  - an architecture style that separates concerns of data/logic, action/request, and presentation
+
+  View
+    - User sees this level
+    - html, markup, js, css, forms
+
+  Models
+    - business logic
+    - database interaction
+    - the bulk of your application logic
+    - MAXIMUM FUNCTIONALITY
+
+  Controller
+    - brokers data between the Model and View
+    - MINIMUM FUNCTIONALITY
+
+* Fat Model, Skinny Controller
+  - keep all of your logic in your model
 
 === Plugins and Gems
     you can add 3rd party functionaly to you application using plugins and gems

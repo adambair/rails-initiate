@@ -4,7 +4,6 @@ Previous instructors include Adam Bair and Joe Grossberg
 == Description
 This course is designed to introduce you to the basics of Ruby on Rails.
 
-=== Rails
 * The Model, View, Controller architecture
 * Managing your database with migrations
 * Convention over Configurations and DRY

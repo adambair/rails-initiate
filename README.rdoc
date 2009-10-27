@@ -27,3 +27,7 @@ This class was designed for Intridea and first taught at Hotel George in Washint
 * Intridea Offices in Washinton, D.C - October 2009
 * Private training - October 2009
 
+== License
+
+Contact Adam Bair (adam@intridea.com, adambair@gmail.com)
+

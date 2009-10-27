@@ -53,7 +53,6 @@ This course is designed to introduce you to the basics of Ruby on Rails.
 
     http://www.vim.org/download.php
 
-
 === OSX
 You can use the version of Ruby that is included with OSX but I find that it makes life easier in the long run to reinstall Ruby through Macports. You can easily update Ruby and anything that you install from Macports will be aware of your updated version.
 
@@ -329,42 +328,99 @@ Models interact with the database and contain the logic for your application
  
 === Controllers
 
-    handle all of the requests to your application
-    provides data from the model to the view
-    session and authentication management
-    anything request driven lives here
-    keep controllers small by keeping business logic in your models
-    provide data to your views using instance variables
-      - the @ sign denotes an instance variable: @post or @posts for example
-      - keep the number of instance variables to a minimum per request for clarity
-    methods available for requests are called 'actions'
-    protect methods that are not meant to be hit directly with private or protected
-    basic authentication
+* Handle all of the requests to your application
+* Broker data between the Model and the View layers of MVC
+* Methods within controllers that are available for requests are called 'actions'
+* Provide data to your views using instance variables
+  - The @ sign denotes an instance variable: @post or @posts for example
+  - Keep the number of instance variables to a minimum per request for clarity
+* Protect methods that are not meant to be hit directly from the web with private or protected
+* Session and authentication management happens here in the Controller layer of MVC
+* Anything request driven lives here
+* Keep controllers small by keeping business logic in your models
 
-      private
-        def authenticate
-          authenticate_or_request_with_http_basic do |user, pass|
-          user == "admin" && pass == "password"
-        end
+=== Default actions for RESTFUL Controllers
+* By default you will have 7 actions available
 
-      - this is BASIC authentication
-      - good for quick one-offs
-      - warning: username and password are sent to the server in PLAIN TEXT
-      - for robust authentication check out these plugins:
-        - authlogic: http://github.com/binarylogic/authlogic/tree/master
-        - clearance: http://github.com/thoughtbot/clearance/tree/master
+    # GET /comments
+    def index
+    end
 
-    respond_to blocks
-      - you can change the format of the information your application returns
-      - html, xml, and json are built in
-      - you can specify your own custom types simply by adding the format seen below
+    # GET /comments/1
+    def show
+    end
 
-      respond_to do |format|
-        format.html # will render index.html.erb
-        format.atom # will render index.atom.builder -- THIS IS CUSTOM
-        format.xml  { render :xml => @posts }
-        format.json { render :json => @posts }
+    # GET /comments/new
+    def new
+    end
+
+    # GET /comments/1/edit
+    def edit
+    end
+
+    # POST /comments
+    def create
+    end
+
+    # PUT /comments/1
+    def update
+    end
+
+    # DELETE /comments/1
+    def destroy
+    end
+
+* These 7 actions allow for all of the basic CRUD operations
+* These actions also map to HTTP verbs to create a RESTful interface
+
+* Question: What are CRUD operations?
+
+    CRUD stands for: 'create', 'read', 'update', 'destroy'
+    CRUD maps to the standard HTTP verbs
+
+* Question: What are HTTP verbs?
+    
+    HTTP verbs are specified in the headers of a web request
+    There are 4 different verbs that can be used: 'post', 'get', 'put', 'delete'
+
+* Question: What does RESTful mean?
+
+    REST stands for 'REpresentation State Transfer'
+    An application is RESTful when it maps HTTP verbs to application endpoints (actions in Rails)
+    Basically REST = HTTP verbs + CRUD
+
+=== Basic authentication
+* This is BASIC authentication
+* Good for quick one-offs
+* Warning: username and password are sent to the server in PLAIN TEXT
+    
+    # in app/controllers/applicaiton_controller.rb
+
+    private
+      def authenticate
+        authenticate_or_request_with_http_basic do |user, pass|
+        user == "admin" && pass == "password"
       end
+
+* You can protect methods by using before_filters in your controllers
+
+  
+
+- for robust authentication check out these plugins:
+  - authlogic: http://github.com/binarylogic/authlogic/tree/master
+  - clearance: http://github.com/thoughtbot/clearance/tree/master
+
+respond_to blocks
+  - you can change the format of the information your application returns
+  - html, xml, and json are built in
+  - you can specify your own custom types simply by adding the format seen below
+
+  respond_to do |format|
+    format.html # will render index.html.erb
+    format.atom # will render index.atom.builder -- THIS IS CUSTOM
+    format.xml  { render :xml => @posts }
+    format.json { render :json => @posts }
+  end
 
 === Views
 

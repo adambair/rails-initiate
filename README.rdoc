@@ -1,0 +1,30 @@
+= Rails Initiate
+Previous instructors include Adam Bair
+
+== Description
+This course is designed to introduce you to the basics of Ruby on Rails.
+
+=== Rails
+* The Model, View, Controller architecture
+* Managing your database with migrations
+* Convention over Configurations and DRY
+* Basic ActiveRecord associations
+* Interacting with your application via console
+* Helpers, partials, and layouts
+* Controllers and filters
+* RESTful concepts
+* Deployment with Heroku
+* Libraries and RubyGems
+
+== Goal
+After completing this lab heavy course you should have the knowledge to create and maintain simple Ruby and Rails applications while adhering to best practices.
+
+== Notes
+This class was designed for Intridea and first taught at Hotel George in Washinton, D.C.
+
+== Past Classes
+
+* Hotel George in Washington, D.C. - February 2009
+* Intridea Offices in Washinton, D.C - October 2009
+* Private training - October 2009
+

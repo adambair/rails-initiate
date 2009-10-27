@@ -1,0 +1,446 @@
+= Rails Initiate
+
+Past instructors include Adam Bair and Joe Grossberg
+
+== Description
+This course is designed to introduce you to the basics of Ruby on Rails.
+
+=== Installfest
+
+* Who needs help getting Ruby and Rails up and running on their machines?
+
+=== Windows
+
+* Download and run the Ruby installer
+
+    http://rubyinstaller.org
+
+* Make sure that c:\Ruby\bin is in your path
+* Verify that Ruby is installed (via command line)
+
+    Start -> Run -> cmd
+
+    ruby -v  #=> should give you a version number
+    irb      #=> should load Interactive Ruby
+    gem -v   #=> should give you a version number
+
+* Install rails via RubyGems (which comes with the Ruby Installer)
+
+    gem install rails
+
+* Verify that Rails is installed correctly
+
+    rails -v #=> should give you a version number
+
+* Download the sqlite3 command line binary
+
+    http://www.sqlite.org/sqlite-3_6_19.zip
+
+* Download the sqlite3 dlls
+  
+    http://www.sqlite.org/sqlitedll-3_6_19.zip
+
+* Unzip both files    
+* Copy sqlite3.def and sqlite3.dll to c:\windows\system32
+* Copy sqlite3.exe to c:\windows\system32
+
+=== OSX
+You can use the version of Ruby that is included with OSX but I find that it makes life easier in the long run to reinstall Ruby through Macports. You can easily update Ruby and anything that you install from Macports will be aware of your updated version.
+
+* Make sure you install the Developer Tools which includes XCode and the GCC compiler.
+* You can install this from the 2nd disk that comes with OSX called 'Developer Tools'
+* If you don't have this disk you can download XCode from Apple (about 700MB)
+  
+  http://developer.apple.com/mac
+
+* Download and install Macports
+
+    http://www.macports.org/install.php
+
+* Verify that Macports is installed correctly
+
+    port #=> then type quit to exit
+
+* Install Ruby via Macports
+
+    sudo port install ruby
+
+* Make sure that you update your path so that /usr/local/bin is first
+  - This will ensure that binaries installed by Macports are picked up before the OSX version.
+
+* Verify that Ruby is installed correctly
+
+    ruby -v  #=> should give you a version number
+    irb      #=> should load Interactive Ruby
+
+* Install sqlite3 from Macports
+
+    sudo port install sqlite3
+
+* Install the ruby sqlite3 library via RubyGems
+
+    sudo gem install sqlite3-ruby
+
+* Verify that sqlite3 is installed correctly
+
+    sqlite3 --version #=> should display a version number
+
+* Install Ruby on Rails via RubyGems
+  
+    sudo gem install rails
+
+* Verify that Rails is installed correctly
+
+    rails -v #=> should give you a version number
+
+=== Linux
+
+* Use whatever package manager your comfortable with (yum, apt, portage, etc)
+* Install ruby, rubygems, sqlite3, and rails
+* The instructions should be about the same as OSX
+* Just substitute Macports with the package manager of your choice
+
+=== Concepts
+
+* DRY - Don't Repeat Yourself
+  avoid duplicated code - extract duplicate code into a single method
+
+* COC - Convention over Configuration
+  - many of the small decisions have already been made for you
+  - COC allows you to focus on the problem domain of your application instead of worrying about where code will live, how things will be named, etc
+
+* MVC - Model, View, Controller
+  - an architecture style that separates concerns of data/logic, action/request, and presentation
+
+  View
+    - User sees this level
+    - html, markup, js, css, forms
+
+  Models
+    - business logic
+    - database interaction
+    - the bulk of your application logic
+    - MAXIMUM FUNCTIONALITY
+
+  Controller
+    - brokers data between the Model and View
+    - MINIMUM FUNCTIONALITY
+
+* Fat Model, Skinny Controller
+  - keep all of your logic in your model
+
+=== Lab 01: Create a Rails Application [ 01_create_a_rails_application.rb ]
+* Use the 'rails' command to create a new application callled 'blog'
+
+=== Structure of a Rails applicatoin
+
+      app     #=> models, views, controllers, helpers, app logic
+      config  #=> database, environment configuration, routes
+      db      #=> migrations, schema.rb
+      doc     #=> a place for your app's documentation
+      lib     #=> library files, rake tasks, code that doesn't fit in the app/* folders
+      log     #=> log files for all of your environments (prod, dev, test)
+      public  #=> accessable to everyone, images, javascript, stylesheets, static pages
+      script  #=> console, server, generators
+      spec    #=> rspec tests/specifications and configuration
+      test    #=> built in test suite Test::Unit
+      tmp     #=> sessions, cache, etc
+      vendor  #=> 3rd party code, plugins, gems, vendored rails
+
+=== Starting a Rails application
+
+      ruby script/server  #=> start app in dev mode at http://localhost:3000
+
+=== Generators
+
+    ruby script/generate #=> will list all available generators
+
+    Scaffold
+      ruby script/generate scaffold #=> will explain what the generator does
+      ruby script/generate scaffold Post title:string body:text
+        - create all views, models, controllers, and migrations for a structure
+        - the migration will have id, created_at, and updated_at automatically
+      ruby script/destroy scaffold Post
+
+    Migrations
+
+      ruby script/generate migration some_migration_name
+        - will create a blank migration for you
+        - the name is merely cosmetic and for description only
+        - NEVER MODIFY OLD MIGRATIONS
+          this will caus headaches for other developers and for deployments
+          migrations will only run the newest migrations
+          old migrations are never run again unless you go all the way back down
+          think of migrations as 'run once' operations
+          if you need to change something in the database, make a new migration
+          modifying old migrations will bite you sooner or later
+      rake db:migrate   #=> run all new migrations on the development database
+        - rake db:migrate RAILS_ENV=production #=> migrations on the production database
+      rake db:rollback  #=> undo current migration
+
+      http://api.rubyonrails.org/classes/ActiveRecord/Migration.html
+
+=== Console
+
+    ruby script/console
+      - this is like irb but within the context of your Rails application
+      - you can access any part of your application through the console
+      - execute arbitrary ruby code on the fly just like in irb
+
+=== Rake
+
+    rake (Ruby make) is a tool to run 'tasks' such as migrations, tests, etc
+      - rake db:migrate
+      - rake test
+      - rake spec
+
+=== Models
+
+    interact with the database and contain the logic for your application
+    this is where the business logic should live
+    all of the data associations and validations live here
+      - validation examples
+          http://ar.rubyonrails.org/classes/ActiveRecord/Validations/ClassMethods.html
+      - association examples
+          http://api.rubyonrails.org/classes/ActiveRecord/Associations/ClassMethods.html
+      - customize validation messages using
+          validates_presence_of :name, :message => 'custom message'
+    has_many / belongs_to
+      - two halves of a single relationship
+      - the belongs_to side of the association is where the foriegn key is located
+    you can create SEO-friendly links by using to_param
+
+       def to_param
+        "#{id}-#{name.gsub(' ','-')}"
+       end
+
+=== Controllers
+
+    handle all of the requests to your application
+    provides data from the model to the view
+    session and authentication management
+    anything request driven lives here
+    keep controllers small by keeping business logic in your models
+    provide data to your views using instance variables
+      - the @ sign denotes an instance variable: @post or @posts for example
+      - keep the number of instance variables to a minimum per request for clarity
+    methods available for requests are called 'actions'
+    protect methods that are not meant to be hit directly with private or protected
+    basic authentication
+
+      private
+        def authenticate
+          authenticate_or_request_with_http_basic do |user, pass|
+          user == "admin" && pass == "password"
+        end
+
+      - this is BASIC authentication
+      - good for quick one-offs
+      - warning: username and password are sent to the server in PLAIN TEXT
+      - for robust authentication check out these plugins:
+        - authlogic: http://github.com/binarylogic/authlogic/tree/master
+        - clearance: http://github.com/thoughtbot/clearance/tree/master
+
+    respond_to blocks
+      - you can change the format of the information your application returns
+      - html, xml, and json are built in
+      - you can specify your own custom types simply by adding the format seen below
+
+      respond_to do |format|
+        format.html # will render index.html.erb
+        format.atom # will render index.atom.builder -- THIS IS CUSTOM
+        format.xml  { render :xml => @posts }
+        format.json { render :json => @posts }
+      end
+
+=== Views
+
+    all of your markup, js, css goes here
+    try to keep complexity to a minimum
+    keep things dry by moving logic into helpers and repeated markup into helpers
+
+    ERB - embedded Ruby
+      - <%  %> and <%= %> are the tags for erb
+      - execute Ruby within the context of html
+      - % will not show up in your markup
+      - %= will show up in your markup
+      - %#= is an erb comment
+
+    Partials
+      - extract common logic into re-usable html fragments
+      - partial filenames begin with an underscore: _post.html.erb
+
+    Layouts
+      - layouts wrap your views, headers, footers, etc should be setup here
+      - they live in /views/layouts
+      - it's common to have only a few layouts for your application
+        - examples would be application.html.erb, site.html.erb, admin.html.erb
+      - scaffolds create a layout for each scaffold
+        - you should ditch these and build your own application.html.erb
+      - include script.aculo.us and prototype
+        - <%= javascript_include_tag :defaults %>
+      - you can specify a layout manually in the controller
+
+          class PostsController < ApplicationController
+            layout 'custom_layout'
+          end
+
+=== Helpers
+
+    all helpers are available to your views
+    you can extract logic from your views into methods here
+    these are normal ruby methods that you can access from your views
+
+=== Routes
+
+    this is where you specify what actions are available for your application
+    rake routes
+      - display all routes available to your application
+
+    map.resources :posts
+      - generate all routes for the posts_controller
+        - localhost:3000/posts
+
+    map.resources :posts, :has_many => :comments
+      - generate all routes for the posts_controller along with routes for comments
+        - localhost:3000/posts/:id/comments
+
+    map.root => :controller_name, :action => :action_name
+      - change the default route for your application to point at the specified location
+      - make sure to delete public/index.html for the root route to be functional
+
+    resource routes - http://api.rubyonrails.org/classes/ActionController/Resources.html
+    standard routes - http://api.rubyonrails.org/classes/ActionController/Routing.html
+
+=== Plugins and Gems
+    you can add 3rd party functionaly to you application using plugins and gems
+
+    Plugins
+      ruby script/plugin install http://repo.pragprog.com/svn/Public/plugins/annotate_models
+        - install annotate_models into vendor/plugins/annotate_models
+      ruby script/plugin remove annotate_models
+        - remove the installed plugin
+
+    Gems
+      sudo gem install mislav-will_paginate
+        -installs the will_paginate gem onto your SYSTEM
+      you can also specify which gems your application needs using config.gem
+        - add the following line to your config/environment.rb
+
+          config.gem 'mislav-will_paginate', :version => '~> 2.2.3', :lib => 'will_paginate', :source => 'http://gems.github.com'
+
+        - sudo rake gems:install
+          this will install all the gems required by the application to your SYSTEM
+
+    Vendoring Rails
+      you can freeze a rails version to your application
+      once you've 'vendored', the app will use the vendor version of rails instead of the version installed on the system
+      rake freeze:edge
+        - will install the latest version of edgerails into your vendor folder
+      rake freeze:edge VERSION=2.2.3
+        - will freeze Rails 2.2.3 to the vendor folder
+
+=== Testing
+    this is a class in itself - we could fill volumes with testing methodology
+    unfortunately we only went into this briefly
+
+    The idea is that you want to write a test to assert your intention for the code you are about to write. You build up a set of regression test as you build your software.
+
+    Red, Green, Refactor
+      - write the test first, run it, it fails because there is no code (red)
+      - write just enough code to satisfy the test, run it, it passes (green)
+      - consider what you've just written and see if it could be written better in a different way (refactor)
+
+    Autotest will run all of your tests automatically
+      - it will sit and wait until you modify a file, then it will run the associated tests
+      - sudo gem install ZenTest
+      - just run 'autotest' in the root of your application
+
+    Continous Integration Testing
+      - watches your repository and will run the tests for each commit
+      - will email the entire team if a test fails
+      - check out Integrity http://integrityapp.com
+
+    Test::Unit is the name of the built-in test suite that ships with Rails
+      - Test::Unit (TDD)
+
+    Rspec is the plugin/gem we used in class (Intridea Preferred)
+      - http://rspec.info
+      - Rspec (BDD) - Behavior Driven Development
+      - spec/spec.opts - change --format from 'progress' to 'specdoc' for verbose output
+      - I highly recommend you pick up the beta book on Rspec by the Pragmatic Programmers
+        - http://pragprog.com/titles/achbd/the-rspec-book
+        - written by the guys who created rspec and cucumber
+
+    FactoryGirl is a fixtures replacement that we use at Intridea
+      - you can build test fixtures on the fly instead of creating them beforehand
+      - http://github.com/thoughtbot/factory_girl/tree/master
+
+    Cucumber was only mentioned and is used for creating executable user stories
+      - http://cukes.info
+
+Resources
+
+=== Intridea University Introduction to Ruby on Rails Mailing List
+    - this is a private list for alumni of the Intro to rails course.
+    - homepage:	http://groups.google.com/group/intridea-university-intro-to-rails
+    - email: intridea-university-intro-to-rails@googlegroups.com
+
+=== Why's Poignant Guide to Ruby
+    - http://poignantguide.net/ruby
+    - why the lucky stiff (_why) - @_why on twitter
+    - all Ruby developers read this book when they start out
+    - light hearted, in the spirit of the language
+    - free pdf version
+    - chunky bacon
+
+=== Mr. Neighborly's Humble Little Ruby Book
+    - http://www.humblelittlerubybook.com/
+    - Jeremy McAnally of ENTP
+    - light hearted, in the spirit of the language
+    - free pdf version
+
+=== Programming Ruby
+    - http://www.pragprog.com/titles/ruby/programming-ruby
+    - Dave Thomas and Andy Hunt of the Pragmatic Programmers
+    - seems like it was the first Ruby book written in English
+    - pretty good, odd examples, but a good reference
+
+=== The Ruby Way
+    - Hal Fulton
+    - http://www.amazon.com/Ruby-Way-Second-Addison-Wesley-Professional/dp/0672328844
+    - Hardcore language reference covering advanced topics
+
+=== Ruby Cookbook
+    - http://oreilly.com/catalog/9780596523695/
+    - I've found this book to be quite valuable since ruby doesn't change often
+
+=== Agile Web Development with Rails 3rd Edition
+    - David Hansson and Dave Thomas
+    - http://pragprog.com/titles/rails3/agile-web-development-with-rails-third-edition
+    - The original Rails book, now in it's 3rd iteration
+
+=== The RSpec Book
+    - creators of RSpec and Cucumber
+    - http://pragprog.com/titles/achbd/the-rspec-book
+
+
+=== Railscasts
+    - Ryan Bates
+    - 150+ short screencasts on useful Rails topics
+
+=== Peepcode
+    - Geoffrey Grosenbach
+    - Many 60+ min screencasts covering rails topics in-depth
+    - $9 an episode (can get an unlimited license)
+
+=== Confreaks
+    - http://www2.confreaks.com/events
+    - excellent videos of major Ruby conferences
+    - GREAT stuff here -- can't recommend this highly enough
+
+=== The Least Surprised in "The Red Scared"
+    - http://www.youtube.com/watch?v=mXZ_htL1rOI
+    - http://www.youtube.com/watch?v=ng95M-cRb44
+    - http://www.youtube.com/watch?v=Du_RTMmofWM
+

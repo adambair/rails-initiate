@@ -131,6 +131,9 @@ You can use the version of Ruby that is included with OSX but I find that it mak
 
 === Lab 01: Create a Rails Application [ 01_create_a_rails_application.rb ]
 * Use the 'rails' command to create a new application callled 'blog'
+* Test your application by running 'ruby script/server' in the blog folder
+* View your application in a web browser
+* Explore the directory structure of your newly created application
 
 === Structure of a Rails applicatoin
 
@@ -150,42 +153,60 @@ You can use the version of Ruby that is included with OSX but I find that it mak
 === Starting a Rails application
 
       ruby script/server  #=> start app in dev mode at http://localhost:3000
+      ruby script/server -p 4000 #=> starts the app at http://localhost:4000
+      ruby script/server -e production #=> start the application in production mode
 
 === Generators
+* Generators will allow you to rapidly add baseline functionality to a Rails application
+* There are built in generators that come with rails
+* There are also custom generators provided by 3rd party libraries
+* Once you're comfortable with Ruby and Rails you can evne create your own
 
     ruby script/generate #=> will list all available generators
 
-    Scaffold
-      ruby script/generate scaffold #=> will explain what the generator does
-      ruby script/generate scaffold Post title:string body:text
-        - create all views, models, controllers, and migrations for a structure
-        - the migration will have id, created_at, and updated_at automatically
-      ruby script/destroy scaffold Post
+* Creating a Scaffold
 
-    Migrations
+    ruby script/generate scaffold #=> will explain what the generator does
 
-      ruby script/generate migration some_migration_name
-        - will create a blank migration for you
-        - the name is merely cosmetic and for description only
-        - NEVER MODIFY OLD MIGRATIONS
-          this will caus headaches for other developers and for deployments
-          migrations will only run the newest migrations
-          old migrations are never run again unless you go all the way back down
-          think of migrations as 'run once' operations
-          if you need to change something in the database, make a new migration
-          modifying old migrations will bite you sooner or later
-      rake db:migrate   #=> run all new migrations on the development database
-        - rake db:migrate RAILS_ENV=production #=> migrations on the production database
-      rake db:rollback  #=> undo current migration
+    ruby script/generate scaffold Post title:string body:text
+      # Create all views, models, controllers, routes, and migrations for a resource
+      # the title/body arguments are what populate your migration
 
-      http://api.rubyonrails.org/classes/ActiveRecord/Migration.html
+* Removing a Scaffold
+
+    ruby script/destroy scaffold Post
+
+=== Lab 02: Create a Post Resource [ 02_create_a_post_resource.rb ]
+* Use the scaffold generator to create a Post resource
+* The Post should have a title, body, and author fields
+* Start your application and explore the freshly minted scaffold
+
+* Migrations
+
+    ruby script/generate migration some_migration_name
+
+* Running a migration
+
+    rake db:migrate   #=> run all new migrations on the development database
+
+* Reversing a migration
+
+    rake db:rollback  #=> undo the last migration
+
+* NEVER MODIFY OLD MIGRATIONS
+  - this will caus headaches for other developers and for deployments
+  - migrations will only run the newest migrations
+  - old migrations are never run again unless you go all the way back down
+  - think of migrations as 'run once' operations
+  - if you need to change something in the database, make a new migration
+  - modifying old migrations will bite you sooner or later
 
 === Console
+* The Rails Console is like irb but within the context of your Rails application
+* You can access any part of your application through the console
+* Execute arbitrary ruby code on the fly just like in irb
 
     ruby script/console
-      - this is like irb but within the context of your Rails application
-      - you can access any part of your application through the console
-      - execute arbitrary ruby code on the fly just like in irb
 
 === Rake
 

@@ -389,76 +389,93 @@ Models interact with the database and contain the logic for your application
     An application is RESTful when it maps HTTP verbs to application endpoints (actions in Rails)
     Basically REST = HTTP verbs + CRUD
 
-=== Basic authentication
-* This is BASIC authentication
-* Good for quick one-offs
-* Warning: username and password are sent to the server in PLAIN TEXT
-    
-    # in app/controllers/applicaiton_controller.rb
+== Respond_to Blocks
+* Rails scaffolding provides html and xml by default
 
-    private
-      def authenticate
-        authenticate_or_request_with_http_basic do |user, pass|
-        user == "admin" && pass == "password"
-      end
+    # start your rails application and go to http://localhost:3000/posts
+    # then visit http://localhost:3000/posts.xml
+    # xml is built right in from the start
 
-* You can protect methods by using before_filters in your controllers
-
-  
-
-- for robust authentication check out these plugins:
-  - authlogic: http://github.com/binarylogic/authlogic/tree/master
-  - clearance: http://github.com/thoughtbot/clearance/tree/master
-
-respond_to blocks
-  - you can change the format of the information your application returns
-  - html, xml, and json are built in
-  - you can specify your own custom types simply by adding the format seen below
+* You can change the format of the information your application returns
+* html, xml, and json are built into Rails
+* You can also specify your own custom types if necessary
 
   respond_to do |format|
     format.html # will render index.html.erb
-    format.atom # will render index.atom.builder -- THIS IS CUSTOM
     format.xml  { render :xml => @posts }
     format.json { render :json => @posts }
   end
 
 === Views
+* Views are where your markup and ERB live 
+* You should try to keep complexity to a minimum
+* No data logic or munging should happen here
+* keep things dry by moving logic into helpers and repeated markup into helpers
 
-    all of your markup, js, css goes here
-    try to keep complexity to a minimum
-    keep things dry by moving logic into helpers and repeated markup into helpers
+=== ERB - embedded Ruby
+* <%  %> and <%= %> are the tags for erb
+* Execute Ruby within the context of html
 
-    ERB - embedded Ruby
-      - <%  %> and <%= %> are the tags for erb
-      - execute Ruby within the context of html
-      - % will not show up in your markup
-      - %= will show up in your markup
-      - %#= is an erb comment
+    <% 1+1 %>       #=> will be evauluated but not displayed
+    <%= 1+1 %>      #=> will be evaluated and displayed (2)
+    <%# 1+1 %>      #=> will not be evaluated or displayed
 
-    Partials
-      - extract common logic into re-usable html fragments
-      - partial filenames begin with an underscore: _post.html.erb
+=== Partials
+* Extract common logic into re-usable html fragments
+* Partial filenames begin with an underscore: _post.html.erb
 
-    Layouts
-      - layouts wrap your views, headers, footers, etc should be setup here
-      - they live in /views/layouts
-      - it's common to have only a few layouts for your application
-        - examples would be application.html.erb, site.html.erb, admin.html.erb
-      - scaffolds create a layout for each scaffold
-        - you should ditch these and build your own application.html.erb
-      - include script.aculo.us and prototype
-        - <%= javascript_include_tag :defaults %>
-      - you can specify a layout manually in the controller
+  <%= render :partial => 'post', :collection => @posts %>
+  # will render the app/posts/_post.erb partial once for each post in @posts
 
-          class PostsController < ApplicationController
-            layout 'custom_layout'
-          end
+=== Layouts
+* Layouts are html/erb that wrap each of your views
+* They live in /views/layouts
+* It's common to have only a few layouts for your application
+  - examples: application.html.erb, site.html.erb, admin.html.erb
+
+* Scaffolds create a layout for each scaffold
+  - you should ditch these and build your own application.html.erb
+
+* This is also where you include your css and javascript files
+* Include script.aculo.us and prototype
+
+    <%= javascript_include_tag :defaults %>
+
+* You can specify a layout manually in the controller
+
+      class PostsController < ApplicationController
+        layout 'custom_layout'
+      end
+
+* The default layout is 'app/views/layouts/application.html.erb'
+* Yield is what will display each of your views
+* This is where you can create your headers and footers
+
+    <%= render :partial => 'header' %>
+    <%= yield %>
+    <%= render :partial => 'footer' %>
 
 === Helpers
 
-    all helpers are available to your views
-    you can extract logic from your views into methods here
-    these are normal ruby methods that you can access from your views
+* All helpers are available to your views
+
+    # application_controller.rb
+    helper :all
+    # makes all helpers available to all views
+
+* You can extract logic from your views into methods here
+* These are normal ruby methods that you can access from your views
+
+    # Example
+    # app/helpers/posts_helper.rb
+    module PostsHelper
+      def comment_count(post)
+        pluralize(post.comments.count, 'Comments')
+      end
+    end
+
+    # in a view somewhere
+    <%= comment_count(@post) %>
 
 === Routes
 
@@ -480,6 +497,37 @@ respond_to blocks
 
     resource routes - http://api.rubyonrails.org/classes/ActionController/Resources.html
     standard routes - http://api.rubyonrails.org/classes/ActionController/Routing.html
+
+=== Basic authentication
+* This is BASIC authentication
+* Good for quick one-offs
+* Warning: username and password are sent to the server in PLAIN TEXT
+    
+    # in app/controllers/applicaiton_controller.rb
+
+    private
+      def authenticate
+        authenticate_or_request_with_http_basic do |user, pass|
+        user == "admin" && pass == "password"
+      end
+
+* You can protect methods by using before_filters in your controllers
+
+    class PostsController < ApplicationController
+      before_filter :authenticate, :only => [:destroy]
+
+      def destroy
+        # some logic
+      end
+    end
+  
+    # this will prompt a user for a username and a password on the destroy action
+
+- For more robust authentication check out these plugins:
+  - Authlogic: http://github.com/binarylogic/authlogic/tree/master
+  - Clearance: http://github.com/thoughtbot/clearance/tree/master
+
+=== Lab XX: Add basic authentication [ XX_add_basic_authentication.rb ]
 
 === Concepts
 

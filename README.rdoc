@@ -1,5 +1,5 @@
 = Rails Initiate
-Previous instructors include Adam Bair
+Previous instructors include Adam Bair and Joe Grossberg
 
 == Description
 This course is designed to introduce you to the basics of Ruby on Rails.

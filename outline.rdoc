@@ -140,6 +140,14 @@ You can use the version of Ruby that is included with OSX but I find that it mak
     tmp     #=> sessions, cache, etc
     vendor  #=> 3rd party code, plugins, gems, vendored rails
 
+=== Basic Anatomy of a Rails Request
+
+
+                                    -> Model
+    Browser -> Routes -> Controller -> View   -> Browser
+                                    -> Helper
+
+
 === Starting a Rails application
     
     ruby script/server  #=> start app in dev mode at http://localhost:3000

@@ -539,8 +539,6 @@ Models interact with the database and contain the logic for your application
 
     <% form_for :comment, :url => post_comments_path(@post) do |f| %>
 
-* Test your comment form to make sure you can add new comments
-
 === Basic authentication
 * This is BASIC authentication
 * Good for quick one-offs
@@ -570,7 +568,8 @@ Models interact with the database and contain the logic for your application
   - Authlogic: http://github.com/binarylogic/authlogic/tree/master
   - Clearance: http://github.com/thoughtbot/clearance/tree/master
 
-=== Lab XX: Add basic authentication [ XX_add_basic_authentication.rb ]
+=== Lab 08: Add basic authentication [ 08_add_basic_authentication.rb ]
+* Protect the destroy and edit in the CommentsController with Basic Auth
 
 === Concepts
 

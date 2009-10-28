@@ -510,7 +510,36 @@ Models interact with the database and contain the logic for your application
       - change the default route for your application to point at the specified location
       - make sure to delete public/index.html for the root route to be functional
 
-=== Lab XX: Nested Resources [ XX_nested_resources.rb ]
+=== Lab 07a: Nested Resources Part 1 [ 07a_nested_resources_part_1.rb ]
+* Create a route that reflects the post has_many comments relationship
+* Verify the routes using 'rake routes'
+
+* Nest the CommentsController
+  - Add a before filter to find the post from param[:post_id]
+  - Hint: 
+
+    private
+      def find_post
+        Post.find(params[:post_id]
+      end
+
+  - Only find and operate on comments scoped to the post found in the before filter
+  - Hint:
+
+    @comment = @post.comments.find(params[:id])
+
+  - Change redirects to the PostsController#show action
+
+=== Lab 07b: Nested Resources Part 2 [ 07b_nested_resources_part_2.rb ]
+* List all comments associated with a post in app/views/posts/show.html.erb
+* Add a comment form to app/views/posts/show.html.erb
+  - You can steal the one from app/views/comments/new.html.erb
+  - Make sure to update the form to use the proper nested route
+  - Hint: 
+
+    <% form_for :comment, :url => post_comments_path(@post) do |f| %>
+
+* Test your comment form to make sure you can add new comments
 
 === Basic authentication
 * This is BASIC authentication

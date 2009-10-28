@@ -678,6 +678,7 @@ Models interact with the database and contain the logic for your application
 * Consider what you've just written and see if it could be written better in a different way (refactor)
 
 == Autotest 
+* http://github.com/seattlerb/zentest/
 * Autotest run all of your tests automatically
 * After it's initial run it will sit there watching your files
 * When a file or test changes - Autotest will only run the appropriate tests!
@@ -685,10 +686,10 @@ Models interact with the database and contain the logic for your application
 * Just run 'autotest' in the root of your application
 
 === Continous Integration Testing
-* Watches your repository and will run the test suite for each commit
-* Will email the entire team if a test fails (if configured)
 * Integrity http://integrityapp.com
 * CruiseControl.rb http://cruisecontrolrb.thoughtworks.com/
+* Watches your repository and will run the test suite for each commit
+* Will email the entire team if a test fails (if configured)
 
 === Test::Unit
 * Test::Unit is the name of the built-in test suite that ships with Rails
@@ -704,6 +705,7 @@ Models interact with the database and contain the logic for your application
     end
 
 === RSpec
+* http://github.com/dchelimsky/rspec/
 * Rspec (BDD) - Behavior Driven Development
 * spec/spec.opts - change --format from 'progress' to 'specdoc' for verbose output
 * RSpec tests (or specs) usually live in /spec in the root of your project
@@ -717,6 +719,7 @@ Models interact with the database and contain the logic for your application
     end
 
 === Cucumber 
+* http://www.cukes.info
 * Used for creating executable user stories
 * Integration testing
 * Commonly run with webrat (headless web browser)
@@ -742,17 +745,19 @@ Models interact with the database and contain the logic for your application
         | 0 | 40 | add | 40 |
   
 === FactoryGirl 
+* http://github.com/thoughtbot/factory_girl/tree/master
 * Fixture replacement - an alternative to static fixtures in a YAML file
 * You can build test fixtures on the fly instead of creating them beforehand
-* http://github.com/thoughtbot/factory_girl/tree/master
 
 === Metric_fu
+* http://github.com/jscruggs/metric_fu
 * Code metrics for Ruby and Rails projects
 * Test Coverage, code complexity, and general metrics
 * It uses Saikuro, Flog, Flay, Rcov, Reek, Roodi, and Subversion/Git by default
 * Generates graphs that track changes over time
 
 === Heroku
+* http://www.heroku.com
 * SIMPLE Ruby hosting 
 * Can host any RACK enabled applications (Sinatra and Rails come to mind)
 * Uses git exclusively
@@ -767,6 +772,31 @@ Models interact with the database and contain the logic for your application
     git commit -m "my new app"
     heroku create
     git push heroku master
+
+=== SASS (Syntatically Awesome Stylesheets)
+* http://sass-lang.com
+* A language that compiles down to CSS
+* Adds variables, mixins, functions, and arithmetic 
+* Example that allows rounded corners in Mozilla and Webkit
+
+    =rounded_bottom_corners
+      :-moz-border-radius-bottomleft 8px
+      :-moz-border-radius-bottomright 8px
+      :-webkit-border-bottom-right-radius 8px
+      :-webkit-border-bottom-left-radius 8px
+
+    =rounded_top_corners
+      :-moz-border-radius-topleft 8px
+      :-moz-border-radius-topright 8px
+      :-webkit-border-top-right-radius 8px
+      :-webkit-border-top-left-radius 8px
+
+    #container
+      +rounded_top_corners
+      +rounded_bottom_corners
+
+    #special_container
+      +rounded_top_corners
 
 === Resources
 * The Well-Grounded Rubyist by David A. Black 

@@ -183,7 +183,7 @@ You can use the version of Ruby that is included with OSX but I find that it mak
     ruby script/server -p 4000 #=> starts the app at http://localhost:4000
     ruby script/server -e production #=> start the application in production mode
 
-=== Lab 01: Create a Rails Application [ 01_create_a_rails_application.rb ]
+== Lab 01: Create a Rails Application [ 01_create_a_rails_application.rb ]
 * Use the 'rails' command to create a new application called 'blog'
 * Test your application by running 'ruby script/server' in the blog folder
 * View your application in a web browser
@@ -229,7 +229,7 @@ If you have run migrations from a scaffold, you need to rollback your migration 
     rake db:rollback
     ruby script/destroy scaffold Post
 
-=== Lab 02: Create a Post Resource [ 02_create_a_post_resource.rb ]
+== Lab 02: Create a Post Resource [ 02_create_a_post_resource.rb ]
 * Use the scaffold generator to create a Post resource
 * The Post should have a title, body, and author fields
 * Use rake to migrate your database
@@ -299,7 +299,7 @@ rake (Ruby make) is a tool to run 'tasks' such as migrations, tests, etc
     rake routes
     # display all routes available to your application
 
-=== Lab 03: Remove Default Rails Page [ 03_remove_default_rails_page.rb ]
+== Lab 03: Remove Default Rails Page [ 03_remove_default_rails_page.rb ]
 * Remove the default Rails landing page (Welcome to Rails)
 * Create a route that will display all of your Posts at localhost:3000/
 
@@ -326,7 +326,7 @@ Models interact with the database and contain the logic for your application
   - customize validation messages using
       validates_presence_of :name, :message => 'custom message'
 
-=== Lab 04: Create a Comment Resource [ 04_create_a_comment_resource.rb ]
+== Lab 04: Create a Comment Resource [ 04_create_a_comment_resource.rb ]
 * Use scaffolding to create a Comment resource with author and body fields
 * Extra Credit: Don't use scaffolding (generators are allowed)
 * Verify your new resource in a browser
@@ -358,7 +358,7 @@ Models interact with the database and contain the logic for your application
 
     # the books table would need to have a student_id field
 
-=== Lab 05: Post Comment Association [ 05_post_comment_association.rb ]
+== Lab 05: Post Comment Association [ 05_post_comment_association.rb ]
 * Create a migration that adds a 'post_id' field to the comments table
 * Create a has_many relationship between the Post and Comment models
 * Verify the relationship through the Rails console
@@ -473,7 +473,7 @@ Models interact with the database and contain the logic for your application
   <%= render :partial => 'comment_fields', :locals => {:f => f } %>
   # will make the local form variable 'f' available in the partial
   
-=== Lab 06: Extract Post Form Fields [ 06_extract_post_form_fields.rb ]
+== Lab 06: Extract Post Form Fields [ 06_extract_post_form_fields.rb ]
 * Create a partial that will contain extracted post form fields
 * Extract common form fields from app/views/posts/edit.html.erb and new.html.erb
 * Put the common fields into the partial
@@ -547,7 +547,7 @@ Models interact with the database and contain the logic for your application
       - change the default route for your application to point at the specified location
       - make sure to delete public/index.html for the root route to be functional
 
-=== Lab 07a: Nested Resources Part 1 [ 07a_nested_resources_part_1.rb ]
+== Lab 07a: Nested Resources Part 1 [ 07a_nested_resources_part_1.rb ]
 * Create a route that reflects the post has_many comments relationship
 * Verify the routes using 'rake routes'
 
@@ -567,7 +567,7 @@ Models interact with the database and contain the logic for your application
 
   - Change redirects to the PostsController#show action
 
-=== Lab 07b: Nested Resources Part 2 [ 07b_nested_resources_part_2.rb ]
+== Lab 07b: Nested Resources Part 2 [ 07b_nested_resources_part_2.rb ]
 * List all comments associated with a post in app/views/posts/show.html.erb
 * Add a comment form to app/views/posts/show.html.erb
   - You can steal the one from app/views/comments/new.html.erb
@@ -605,8 +605,10 @@ Models interact with the database and contain the logic for your application
   - Authlogic: http://github.com/binarylogic/authlogic/tree/master
   - Clearance: http://github.com/thoughtbot/clearance/tree/master
 
-=== Lab 08: Add basic authentication [ 08_add_basic_authentication.rb ]
+== Lab 08: Add basic authentication [ 08_add_basic_authentication.rb ]
 * Protect the destroy and edit in the CommentsController with Basic Auth
+
+== Additional Topics
 
 === Concepts
 
@@ -693,7 +695,7 @@ Models interact with the database and contain the logic for your application
 * This will unpack all of the required gems to vendor/gems/*
 * Rails will check vendor before checking the system for the required gems
 
-== Vendor Rails
+=== Vendor Rails
 * You can freeze a Rails version to your application using the following command:
 
     rake freeze:edge

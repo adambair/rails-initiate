@@ -640,13 +640,13 @@ Models interact with the database and contain the logic for your application
 === Plugins
 * Add 3rd party code to your application
 * No dependency management built in
-* Example: install annotate_models into vendor/plugins/annotate_models
+* Example: install fu_fu into vendor/plugins/fu-fu
 
-    ruby script/plugin install http://repo.pragprog.com/svn/Public/plugins/annotate_models
+    ruby script/plugin install install git://github.com/adambair/fu-fu.git
 
 * Example: remove the installed plugin
 
-    ruby script/plugin remove annotate_models
+    ruby script/plugin remove fu-fu
 
 === config.gem
 * Add 3rd party RubyGem packages to your application

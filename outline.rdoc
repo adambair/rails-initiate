@@ -677,7 +677,7 @@ Models interact with the database and contain the logic for your application
 * Write just enough code to satisfy the test, run it, it passes (green)
 * Consider what you've just written and see if it could be written better in a different way (refactor)
 
-== Autotest 
+=== Autotest 
 * http://github.com/seattlerb/zentest/
 * Autotest run all of your tests automatically
 * After it's initial run it will sit there watching your files

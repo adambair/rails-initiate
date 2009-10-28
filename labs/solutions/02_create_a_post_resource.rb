@@ -1,5 +1,5 @@
 # --------------------------
-# Lab 02: Create a Post Resource
+# Lab 02: Create a Post Resource [ 02_create_a_post_resource.rb ]
 # --------------------------
 # Use the scaffold generator to create a Post resource
 # The Post should have a title, body, and author fields

@@ -157,7 +157,7 @@ You can use the version of Ruby that is included with OSX but I find that it mak
   - Slower because it's reloading the app so often (to pick up changes)
 
 * Test 
-  - Used when running tests (volitile, data is not safe here)
+  - Used when running tests (volatile, data is not safe here)
   - Database is blown away each time tests are run
 
 * Production
@@ -184,7 +184,7 @@ You can use the version of Ruby that is included with OSX but I find that it mak
     ruby script/server -e production #=> start the application in production mode
 
 === Lab 01: Create a Rails Application [ 01_create_a_rails_application.rb ]
-* Use the 'rails' command to create a new application callled 'blog'
+* Use the 'rails' command to create a new application called 'blog'
 * Test your application by running 'ruby script/server' in the blog folder
 * View your application in a web browser
 * Explore the directory structure of your newly created application
@@ -194,7 +194,7 @@ Generators will allow you to rapidly add baseline functionality to a Rails appli
 
 * There are built in generators that come with rails
 * There are also custom generators provided by 3rd party libraries
-* Once you're comfortable with Ruby and Rails you can evne create your own
+* Once you're comfortable with Ruby and Rails you can even create your own
 
     ruby script/generate #=> will list all available generators
 
@@ -216,7 +216,7 @@ After you create a scaffold you'll need to run the migration to create the prope
     rake db:rollback  #=> undo the last migration
 
 === NEVER MODIFY OLD MIGRATIONS
-* This will caus headaches for other developers and for deployments
+* This will cause headaches for other developers and for deployments
 * 'rake db:migrate' will only run the newest migrations
 * Old migrations are never run again unless you go all the way back down
 * Think of migrations as 'run once' operations
@@ -241,7 +241,7 @@ rake (Ruby make) is a tool to run 'tasks' such as migrations, tests, etc
 * Rake tasks are simply specialized Ruby files
 * All the code within a task is Ruby
 
-* Rake tasks are usually loosly related utility tasks that are not required during the normal run of your application. Examples:
+* Rake tasks are usually loosely related utility tasks that are not required during the normal run of your application. Examples:
   - Data imports
   - Data conversions
   - Rotating logs
@@ -314,7 +314,7 @@ Models interact with the database and contain the logic for your application
 
     ORM stands for Object Relational Mapper
     It maps SQL statements to code and objects
-    It essentially translates code into SQL statments
+    It essentially translates code into SQL statements
 
 * This is where the business logic should live
 
@@ -333,7 +333,7 @@ Models interact with the database and contain the logic for your application
 
 === ActiveRecord Relationships: has_many / belongs_to
 * Two halves of a single relationship
-* The belongs_to side of the association is where the foriegn key is located
+* The belongs_to side of the association is where the foreign key is located
 
     class Author
       has_many :books
@@ -457,7 +457,7 @@ Models interact with the database and contain the logic for your application
 * <%  %> and <%= %> are the tags for erb
 * Execute Ruby within the context of html
 
-    <% 1+1 %>       #=> will be evauluated but not displayed
+    <% 1+1 %>       #=> will be evaluated but not displayed
     <%= 1+1 %>      #=> will be evaluated and displayed (2)
     <%# 1+1 %>      #=> will not be evaluated or displayed
 
@@ -638,7 +638,7 @@ Models interact with the database and contain the logic for your application
   - keep all of your logic in your model
 
 === Plugins and Gems
-    you can add 3rd party functionaly to you application using plugins and gems
+    you can add 3rd party functionally to you application using plugins and gems
 
     Plugins
       ruby script/plugin install http://repo.pragprog.com/svn/Public/plugins/annotate_models

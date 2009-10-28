@@ -148,6 +148,35 @@ You can use the version of Ruby that is included with OSX but I find that it mak
                                     -> Helper
 
 
+=== Environments
+* By default Rails has 3 environments: development, test, and production
+* Development 
+  - Used by default
+  - Heavy verbose logging
+  - Reloads classes each request
+  - Slower because it's reloading the app so often (to pick up changes)
+
+* Test 
+  - Used when running tests (volitile, data is not safe here)
+  - Database is blown away each time tests are run
+
+* Production
+  - Caches classes, doesn't reload the application per request
+  - Much less logging
+  - Fast
+
+* Environments have separate configurations
+  - config/environments/development.rb, test.rb, production.rb
+  - Each environment has it's own entry in config/database.yml
+  - config/environment.rb is run for every environment
+
+* You can create your own environments (the defaults are just strong suggestions)
+  - Ofen you'll see an additional environment called 'staging'
+
+=== Initializers
+* Live in config/initializers/*
+* Provide specific configuration for your application when it loads
+
 === Starting a Rails application
     
     ruby script/server  #=> start app in dev mode at http://localhost:3000
@@ -740,62 +769,48 @@ Models interact with the database and contain the logic for your application
     git push heroku master
 
 === Resources
+* The Well-Grounded Rubyist by David A. Black 
+  - http://www.amazon.com/Well-Grounded-Rubyist-David-Black/dp/1933988657
 
-=== Why's Poignant Guide to Ruby
-    - http://poignantguide.net/ruby
-    - why the lucky stiff (_why) - @_why on twitter
-    - all Ruby developers read this book when they start out
-    - light hearted, in the spirit of the language
-    - free pdf version
-    - chunky bacon
+* The Ruby Programming Language by Yukihiro Matsumoto and David Flanagan 
+  - http://www.amazon.com/Ruby-Programming-Language-David-Flanagan/dp/0596516177
 
-=== Mr. Neighborly's Humble Little Ruby Book
-    - http://www.humblelittlerubybook.com/
-    - Jeremy McAnally of ENTP
-    - light hearted, in the spirit of the language
-    - free pdf version
+* The Ruby Way 2nd Edition by Hal Fulton 
+  - http://www.amazon.com/Ruby-Way-Second-Techniques-Programming/dp/0672328844
 
-=== Programming Ruby
-    - http://www.pragprog.com/titles/ruby/programming-ruby
-    - Dave Thomas and Andy Hunt of the Pragmatic Programmers
-    - seems like it was the first Ruby book written in English
-    - pretty good, odd examples, but a good reference
+* Why's Poignant Guide to Ruby
+  - http://mislav.uniqpath.com/poignant-guide/
 
-=== The Ruby Way
-    - Hal Fulton
-    - http://www.amazon.com/Ruby-Way-Second-Addison-Wesley-Professional/dp/0672328844
-    - Hardcore language reference covering advanced topics
+* Mr. Neighborly's Humble Little Ruby Book
+  - http://www.humblelittlerubybook.com/
 
-=== Ruby Cookbook
-    - http://oreilly.com/catalog/9780596523695/
-    - I've found this book to be quite valuable since ruby doesn't change often
+* Ruby Cookbook
+  - http://oreilly.com/catalog/9780596523695/
 
-=== Agile Web Development with Rails 3rd Edition
-    - David Hansson and Dave Thomas
-    - http://pragprog.com/titles/rails3/agile-web-development-with-rails-third-edition
-    - The original Rails book, now in it's 3rd iteration
+* Confreaks
+  - http://www2.confreaks.com/events
 
-=== The RSpec Book
-    - creators of RSpec and Cucumber
-    - http://pragprog.com/titles/achbd/the-rspec-book
+* The Least Surprised in "The Red Scared"
+  - http://www.youtube.com/watch?v=mXZ_htL1rOI
+  - http://www.youtube.com/watch?v=ng95M-cRb44
+  - http://www.youtube.com/watch?v=Du_RTMmofWM
 
+* Theory - Smalltalk Best Practice Patterns by Kent Beck 
+  - http://www.amazon.com/Smalltalk-Best-Practice-Patterns-Kent/dp/013476904X
 
-=== Railscasts
-    - Ryan Bates
-    - 150+ short screencasts on useful Rails topics
+* Theory - Refactoring: Improving the Design of Existing Code by Kent Beck and Martin Fowler
+  - http://www.amazon.com/Refactoring-Improving-Design-Existing-Code/dp/0201485672
 
-=== Peepcode
-    - Geoffrey Grosenbach
-    - Many 60+ min screencasts covering rails topics in-depth
-    - $9 an episode (can get an unlimited license)
+* Agile Web Development with Rails 3rd Edition
+  - http://pragprog.com/titles/rails3/agile-web-development-with-rails-third-edition
+  - The original Rails book, now in it's 3rd iteration
 
-=== Confreaks
-    - http://www2.confreaks.com/events
-    - excellent videos of major Ruby conferences
-    - GREAT stuff here -- can't recommend this highly enough
+* The RSpec/Cucumber Book
+  - http://pragprog.com/titles/achbd/the-rspec-book
+  - creators of RSpec and Cucumber
 
-=== The Least Surprised in "The Red Scared"
-    - http://www.youtube.com/watch?v=mXZ_htL1rOI
-    - http://www.youtube.com/watch?v=ng95M-cRb44
-    - http://www.youtube.com/watch?v=Du_RTMmofWM
+* Railscasts
+  - http://www.railscasts.com
 
+* Peepcode
+  - http://www.peepcode.com

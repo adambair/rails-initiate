@@ -637,33 +637,48 @@ Models interact with the database and contain the logic for your application
 * Fat Model, Skinny Controller
   - keep all of your logic in your model
 
-=== Plugins and Gems
-    you can add 3rd party functionally to you application using plugins and gems
+=== Plugins
+* Add 3rd party code to your application
+* No dependency management built in
+* Example: install annotate_models into vendor/plugins/annotate_models
 
-    Plugins
-      ruby script/plugin install http://repo.pragprog.com/svn/Public/plugins/annotate_models
-        - install annotate_models into vendor/plugins/annotate_models
-      ruby script/plugin remove annotate_models
-        - remove the installed plugin
+    ruby script/plugin install http://repo.pragprog.com/svn/Public/plugins/annotate_models
 
-    Gems
-      sudo gem install mislav-will_paginate
-        -installs the will_paginate gem onto your SYSTEM
-      you can also specify which gems your application needs using config.gem
-        - add the following line to your config/environment.rb
+* Example: remove the installed plugin
 
-          config.gem 'mislav-will_paginate', :version => '~> 2.2.3', :lib => 'will_paginate', :source => 'http://gems.github.com'
+    ruby script/plugin remove annotate_models
 
-        - sudo rake gems:install
-          this will install all the gems required by the application to your SYSTEM
+=== config.gem
+* Add 3rd party RubyGem packages to your application
+* Rails has dependency management baked in using config.gem in config/environment.rb
+* You can also specify which gems your application needs using config.gem
+  - add the following line to your config/environment.rb
 
-    Vendoring Rails
-      you can freeze a rails version to your application
-      once you've 'vendored', the app will use the vendor version of rails instead of the version installed on the system
-      rake freeze:edge
-        - will install the latest version of edgerails into your vendor folder
-      rake freeze:edge VERSION=2.2.3
-        - will freeze Rails 2.2.3 to the vendor folder
+    config.gem 'mislav-will_paginate', :version => '~> 2.2.3', 
+                                       :lib => 'will_paginate', 
+                                       :source => 'http://gems.github.com'
+
+  - you can then install this gem using the following command:
+
+    sudo rake gems:install
+
+* If someone doesn't have this gem and they try to start the application, they will be notified of the dependency.
+* You can package your gem dependencies with your application by using the following command:
+
+    rake gems:unpack
+
+* This will unpack all of the required gems to vendor/gems/*
+* Rails will check vendor before checking the system for the required gems
+
+== Vendor Rails
+* You can freeze a Rails version to your application using the following command:
+
+    rake freeze:edge
+
+* Once you've 'vendored' rails, the app will use the vendor version of rails instead of the version installed on the system
+* You can even specify what version of rails you'd like to vendor:
+
+    rake freeze:edge VERSION=2.2.3
 
 === Testing
 * This is a class in itself - we could fill volumes with testing methodology

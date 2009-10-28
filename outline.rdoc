@@ -125,7 +125,7 @@ You can use the version of Ruby that is included with OSX but I find that it mak
 
     rails name_of_application
 
-=== Structure of a Rails applicatoin
+=== Anatomy of a Rails applicatoin
 
     app     #=> models, views, controllers, helpers, app logic
     config  #=> database, environment configuration, routes
@@ -389,7 +389,7 @@ Models interact with the database and contain the logic for your application
     An application is RESTful when it maps HTTP verbs to application endpoints (actions in Rails)
     Basically REST = HTTP verbs + CRUD
 
-== Respond_to Blocks
+=== Respond_to Blocks
 * Rails scaffolding provides html and xml by default
 
     # start your rails application and go to http://localhost:3000/posts
@@ -406,6 +406,10 @@ Models interact with the database and contain the logic for your application
     format.json { render :json => @posts }
   end
 
+* Please be aware the respond_to blocks are NOT REQUIRED
+* You can remove them (keeping the required logic)
+* Your application will still serve html requests by default
+
 === Views
 * Views are where your markup and ERB live 
 * You should try to keep complexity to a minimum
@@ -421,11 +425,22 @@ Models interact with the database and contain the logic for your application
     <%# 1+1 %>      #=> will not be evaluated or displayed
 
 === Partials
-* Extract common logic into re-usable html fragments
+* Extract common view logic into re-usable html fragments
 * Partial filenames begin with an underscore: _post.html.erb
 
   <%= render :partial => 'post', :collection => @posts %>
   # will render the app/posts/_post.erb partial once for each post in @posts
+
+* You can also pass local variables into the partial
+
+  <%= render :partial => 'comment_fields', :locals => {:f => f } %>
+  # will make the local form variable 'f' available in the partial
+  
+=== Lab 06: Extract Post Form Fields [ 06_extract_post_form_fields.rb ]
+* Create a partial that will contain extracted post form fields
+* Extract common form fields from app/views/posts/edit.html.erb and new.html.erb
+* Put the common fields into the partial
+* Make sure that the forms still function
 
 === Layouts
 * Layouts are html/erb that wrap each of your views
@@ -478,10 +493,10 @@ Models interact with the database and contain the logic for your application
     <%= comment_count(@post) %>
 
 === Routes
+* This is where you specify what actions are available for your application
 
-    this is where you specify what actions are available for your application
     rake routes
-      - display all routes available to your application
+     - display all routes available to your application
 
     map.resources :posts
       - generate all routes for the posts_controller
@@ -495,8 +510,7 @@ Models interact with the database and contain the logic for your application
       - change the default route for your application to point at the specified location
       - make sure to delete public/index.html for the root route to be functional
 
-    resource routes - http://api.rubyonrails.org/classes/ActionController/Resources.html
-    standard routes - http://api.rubyonrails.org/classes/ActionController/Routing.html
+=== Lab XX: Nested Resources [ XX_nested_resources.rb ]
 
 === Basic authentication
 * This is BASIC authentication

@@ -637,50 +637,109 @@ Models interact with the database and contain the logic for your application
         - will freeze Rails 2.2.3 to the vendor folder
 
 === Testing
-    this is a class in itself - we could fill volumes with testing methodology
-    unfortunately we only went into this briefly
+* This is a class in itself - we could fill volumes with testing methodology
+  - unfortunately we only went into this briefly
 
-    The idea is that you want to write a test to assert your intention for the code you are about to write. You build up a set of regression test as you build your software.
+* The idea is that you want to write a test to assert your intention for the code you are about to write. 
+* Build up a set of regression test as you build your software.
 
-    Red, Green, Refactor
-      - write the test first, run it, it fails because there is no code (red)
-      - write just enough code to satisfy the test, run it, it passes (green)
-      - consider what you've just written and see if it could be written better in a different way (refactor)
+=== Red, Green, Refactor
+* Write the test first, run it, it fails because there is no code (red)
+* Write just enough code to satisfy the test, run it, it passes (green)
+* Consider what you've just written and see if it could be written better in a different way (refactor)
 
-    Autotest will run all of your tests automatically
-      - it will sit and wait until you modify a file, then it will run the associated tests
-      - sudo gem install ZenTest
-      - just run 'autotest' in the root of your application
+== Autotest 
+* Autotest run all of your tests automatically
+* After it's initial run it will sit there watching your files
+* When a file or test changes - Autotest will only run the appropriate tests!
+* The gem is called ZenTest
+* Just run 'autotest' in the root of your application
 
-    Continous Integration Testing
-      - watches your repository and will run the tests for each commit
-      - will email the entire team if a test fails
-      - check out Integrity http://integrityapp.com
+=== Continous Integration Testing
+* Watches your repository and will run the test suite for each commit
+* Will email the entire team if a test fails (if configured)
+* Integrity http://integrityapp.com
+* CruiseControl.rb http://cruisecontrolrb.thoughtworks.com/
 
-    Test::Unit is the name of the built-in test suite that ships with Rails
-      - Test::Unit (TDD)
+=== Test::Unit
+* Test::Unit is the name of the built-in test suite that ships with Rails
+* Test::Unit (TDD) - Test Driven Development
+* Tests usually live in /test folder of your project root
+* Example
 
-    Rspec is the plugin/gem we used in class (Intridea Preferred)
-      - http://rspec.info
-      - Rspec (BDD) - Behavior Driven Development
-      - spec/spec.opts - change --format from 'progress' to 'specdoc' for verbose output
-      - I highly recommend you pick up the beta book on Rspec by the Pragmatic Programmers
-        - http://pragprog.com/titles/achbd/the-rspec-book
-        - written by the guys who created rspec and cucumber
+    class PersonTest
+      def test_person_has_full_name
+        person = Person.new(:first_name => 'Adam', :last_name => 'Bair')
+        assert_equal('Adam Bair', person.full_name)
+      end
+    end
 
-    FactoryGirl is a fixtures replacement that we use at Intridea
-      - you can build test fixtures on the fly instead of creating them beforehand
-      - http://github.com/thoughtbot/factory_girl/tree/master
+=== RSpec
+* Rspec (BDD) - Behavior Driven Development
+* spec/spec.opts - change --format from 'progress' to 'specdoc' for verbose output
+* RSpec tests (or specs) usually live in /spec in the root of your project
+* Example:
 
-    Cucumber was only mentioned and is used for creating executable user stories
-      - http://cukes.info
+    describe Person do
+      it 'should have a first name' do
+        person = Person.new(:first_name => 'Adam', :last_name => 'Bair')
+        person.full_name.should == 'Adam Bair'
+      end
+    end
 
-Resources
+=== Cucumber 
+* Used for creating executable user stories
+* Integration testing
+* Commonly run with webrat (headless web browser)
+  - Simulates a user clicking around your site according to your specifications
 
-=== Intridea University Introduction to Ruby on Rails Mailing List
-    - this is a private list for alumni of the Intro to rails course.
-    - homepage:	http://groups.google.com/group/intridea-university-intro-to-rails
-    - email: intridea-university-intro-to-rails@googlegroups.com
+* Example:
+
+    Feature: Addition
+      In order to avoid silly mistakes
+      As a math idiot
+      I want to be told the sum of two numbers
+     
+      Scenario Outline: Add two numbers
+        Given I have entered <input_1> into the calculator
+        And I have entered <input_2> into the calculator
+        When I press <button>
+        Then the result should be <output> on the screen
+     
+      Examples:
+        | input_1 | input_2 | button | output |
+        | 20 | 30 | add | 50 |
+        | 2 | 5 | add | 7 |
+        | 0 | 40 | add | 40 |
+  
+=== FactoryGirl 
+* Fixture replacement - an alternative to static fixtures in a YAML file
+* You can build test fixtures on the fly instead of creating them beforehand
+* http://github.com/thoughtbot/factory_girl/tree/master
+
+=== Metric_fu
+* Code metrics for Ruby and Rails projects
+* Test Coverage, code complexity, and general metrics
+* It uses Saikuro, Flog, Flay, Rcov, Reek, Roodi, and Subversion/Git by default
+* Generates graphs that track changes over time
+
+=== Heroku
+* SIMPLE Ruby hosting 
+* Can host any RACK enabled applications (Sinatra and Rails come to mind)
+* Uses git exclusively
+* Free to setup small instance (for personal, testing, staging, or small sites)
+* Can have as many free accounts as you want
+* Very easy to get up and running:
+
+    rails myapp
+    cd myapp
+    git init
+    git add .
+    git commit -m "my new app"
+    heroku create
+    git push heroku master
+
+=== Resources
 
 === Why's Poignant Guide to Ruby
     - http://poignantguide.net/ruby

@@ -637,6 +637,29 @@ Models interact with the database and contain the logic for your application
 * Fat Model, Skinny Controller
   - keep all of your logic in your model
 
+=== Degugging
+* Rails comes with a few things to help you debug
+* Printing out an object to a web page from within a view
+
+    <%= debug @post %>
+
+* Logging using the default logger that comes with Rails
+
+    logger.warn "Something is broken"
+    # you can specify (debug|info|warn|error|fatal) by default
+    # Rails will log these to the appropriate log/* file
+
+* Ruby-Debug
+  - sudo gem install ruby-debug
+  - Interactive debugging
+  - Place the word 'debugger' anywhere in your application
+  - Start your server with:
+
+    ruby script/server --debugger
+
+  - When your application gets to the 'debugger' statement you'll have a live console into your application
+  - In the debugger console you can type 'help' for all available commands
+
 === Plugins
 * Add 3rd party code to your application
 * No dependency management built in

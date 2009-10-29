@@ -1,0 +1,125 @@
+@import rounded_corners
+
+!font_color ||= #333
+!quiet_color ||= !font_color + #333
+!loud_color ||= !font_color - #222
+ 
+!header_color ||= !font_color - #111
+ 
+!link_color ||= #009
+!link_hover_color ||= #000
+!link_focus_color ||= !link_hover_color
+!link_active_color ||= !link_color + #C00
+!link_visited_color ||= !link_color - #333
+ 
+!feedback_border_color ||= #DDD
+!success_color ||= #264409
+!success_bg_color ||= #E6EFC2
+!success_border_color ||= #C6D880
+ 
+!notice_color ||= #514721
+!notice_bg_color ||= #FFF6BF
+!notice_border_color ||= #FFD324
+ 
+!error_color ||= #8A1F11
+!error_bg_color ||= #FBE3E4
+!error_border_color ||= #FBC2C4
+ 
+!highlight_color ||= #FF0
+!added_color ||= #FFF
+!added_bg_color ||= #060
+!removed_color ||= #FFF
+!removed_bg_color ||= #900
+ 
+!blueprint_table_header_color ||= #C3D9FF
+!blueprint_table_stripe_color ||= #E5ECF9
+
+!error_color = red
+
+body
+  color: #333
+  font-family: verdana, arial, helvetica, sans-serif
+  font-size: 13px
+  line-height: 18px
+  width: 800px
+  margin-right: auto
+  margin-left: auto
+
+
+p, ol, ul, td
+  font-family: verdana, arial, helvetica, sans-serif
+  font-size: 13px
+  line-height: 18px
+
+
+pre
+  background-color: #eee
+  padding: 10px
+  font-size: 11px
+
+
+a
+  &:visited
+    color: #666
+  &:hover
+    color: #fff
+    background-color: #000
+  color: #000
+
+
+.fieldWithErrors
+  padding: 2px
+  background-color: red
+  display: table
+
+
+#errorExplanation
+  width: 400px
+  border: 2px solid red
+  padding: 7px
+  padding-bottom: 12px
+  margin-bottom: 20px
+  background-color: #f0f0f0
+
+  h2
+    text-align: left
+    font-weight: bold
+    padding: 5px 5px 5px 15px
+    font-size: 12px
+    margin: -7px
+    background-color: #c00
+    color: #fff
+
+  p
+    color: #333
+    margin-bottom: 0
+    padding: 5px
+
+  ul li
+    font-size: 12px
+    list-style: square
+
+.posts
+  +rounded_corners(10px)
+  padding: 20px
+  background: #eee
+
+.post
+  +rounded_corners
+  background: #ccc
+  border: 1px solid #aaa
+  margin-bottom: 5px
+  padding: 10px
+  
+.pagination, .actions
+  text-align: right
+  padding-top: 10px
+  padding-bottom: 10px
+
+#footer, #header
+  text-align: center
+  h1
+    font-size: 40px
+    a
+      text-decoration: none
+

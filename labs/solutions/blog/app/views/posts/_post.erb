@@ -1,0 +1,12 @@
+<div class='post <%= cycle('odd', 'even') %>'>
+  <h2><%= link_to post.title, post_path(post) %></h2>
+  <p><%= link_to pluralize(post.comments.count, 'comment'), post_path(post) %></p>
+  <p>Posted <%= distance_of_time_in_words_to_now(post.created_at) %> ago</p>
+  <p>
+    <%= link_to 'Show', post %>
+    <%= link_to 'Edit', edit_post_path(post) %>
+    <%= link_to 'Destroy', post, :confirm => 'Are you sure?', :method => :delete %>
+  </p>
+
+  <%= post.body %>
+</div>

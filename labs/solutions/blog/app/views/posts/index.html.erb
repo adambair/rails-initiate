@@ -1,0 +1,17 @@
+<div class='actions'>
+  <%= link_to 'New post', new_post_path %>
+
+  <% if params[:order] == 'created_at DESC' %>
+    <%= link_to 'sort created_at asc', posts_path(:order => 'created_at ASC') %>
+  <% else %>
+    <%= link_to 'sort created_at desc', posts_path(:order => 'created_at DESC') %>
+  <% end %>
+</div>
+
+<div class='posts'>
+  <%= render :partial => 'post', :collection => @posts %>
+</div>
+<%= will_paginate(@posts) %>
+
+<br />
+

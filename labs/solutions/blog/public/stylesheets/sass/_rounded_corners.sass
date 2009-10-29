@@ -1,0 +1,15 @@
+=round_bottom_corners(!radius)
+  :-moz-border-radius-bottomleft = !radius
+  :-moz-border-radius-bottomright = !radius
+  :-webkit-border-bottom-right-radius = !radius
+  :-webkit-border-bottom-left-radius = !radius
+
+=round_top_corners(!radius)
+  :-moz-border-radius-topleft = !radius
+  :-moz-border-radius-topright = !radius
+  :-webkit-border-top-right-radius = !radius
+  :-webkit-border-top-left-radius = !radius
+
+=rounded_corners(!radius = 8px)
+  +round_top_corners(!radius)
+  +round_bottom_corners(!radius)

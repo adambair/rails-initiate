@@ -1,0 +1,7 @@
+.DS_Store
+coverage/*
+doc/api
+doc/app
+log/*
+tmp/*
+public/stylesheets/scaffold.css

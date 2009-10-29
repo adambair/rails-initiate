@@ -1,8 +1,10 @@
 = Rails Initiate
-Previous instructors include Adam Bair and Joe Grossberg
+
+Introduction to Ruby on Rails
 
 == Description
-This course is designed to introduce you to the basics of Ruby on Rails.
+
+This course is designed to introduce you to the basics of Ruby on Rails. We'll cover:
 
 * The Model, View, Controller architecture
 * Managing your database with migrations
@@ -15,19 +17,27 @@ This course is designed to introduce you to the basics of Ruby on Rails.
 * Deployment with Heroku
 * Libraries and RubyGems
 
+And more as time allows.
+
 == Goal
+
 After completing this lab heavy course you should have the knowledge to create and maintain simple Ruby and Rails applications while adhering to best practices.
 
+== Course
+
+All of the coursework can be found in ruby-curious.rdoc
+
 == Notes
-This class was designed for Intridea and first taught at Hotel George in Washinton, D.C.
+
+This class was designed for Intridea and first taught at Hotel George in Washinton, D.C. Previous instructors include Adam Bair and Joe Grossberg.
+
+== License
+
+Contact Adam Bair (adam@intridea.com, adambair@gmail.com)
 
 == Past Classes
 
 * Hotel George in Washington, D.C. - February 2009
 * Intridea Offices in Washinton, D.C - October 2009
 * Private training - October 2009
-
-== License
-
-Contact Adam Bair (adam@intridea.com, adambair@gmail.com)
 

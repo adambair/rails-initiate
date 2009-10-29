@@ -1,7 +1,5 @@
 = Rails Initiate
 
-Introduction to Ruby on Rails
-
 == Description
 
 This course is designed to introduce you to the basics of Ruby on Rails. We'll cover:

@@ -639,7 +639,7 @@ Models interact with the database and contain the logic for your application
 * Fat Model, Skinny Controller
   - keep all of your logic in your model
 
-=== Degugging
+=== Debugging
 * Rails comes with a few things to help you debug
 * Printing out an object to a web page from within a view
 

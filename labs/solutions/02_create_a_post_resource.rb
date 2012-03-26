@@ -7,8 +7,8 @@
 # Start your application and explore the freshly minted scaffold at /posts
 # --------------------------
 
-# ruby script/generate Post title:string author:string body:text
+# rails generate post title:string author:string body:text
 # rake db:migrate
-# ruby script/server
+# rails server
 # Open http://localhost:3000/posts in a browser
 # Explore!

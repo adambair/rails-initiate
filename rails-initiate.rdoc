@@ -100,14 +100,14 @@ Generators will allow you to rapidly add baseline functionality to a Rails appli
 * There are also custom generators provided by 3rd party libraries
 * Once you're comfortable with Ruby and Rails you can even create your own
 
-    ruby script/generate #=> will list all available generators
+    rails generate #=> will list all available generators
 
 === Creating a Scaffold
 A Scaffold will create all views, models, controllers, routes, and migrations for a resource
 
-    ruby script/generate scaffold #=> will explain what the generator does
+    rails generate scaffold #=> will explain what the generator does
 
-    ruby script/generate scaffold Post title:string body:text
+    rails generate scaffold post title:string body:text
       # the title/body arguments are what populate your migration
 
 === Running a migration
@@ -131,10 +131,10 @@ After you create a scaffold you'll need to run the migration to create the prope
 If you have run migrations from a scaffold, you need to rollback your migration before deleting the scaffold (which will also delete the migration)
 
     rake db:rollback
-    ruby script/destroy scaffold Post
+    rails destroy scaffold post
 
 == Lab 02: Create a Post Resource [ 02_create_a_post_resource.rb ]
-* Use the scaffold generator to create a Post resource
+* Use the scaffold generator to create a post resource
 * The Post should have a title, body, and author fields
 * Use rake to migrate your database
 * Start your application and explore the freshly minted scaffold

@@ -1,6 +1,6 @@
 = Rails Initiate
 
-Past instructors include Adam Bair and Joe Grossberg
+Past instructors include Adam Bair, Joe Grossberg, and Paul Ostazeski.
 
 === Description
 This course is designed to introduce you to the basics of Ruby on Rails.
@@ -20,22 +20,28 @@ Options include:
 * The 'rails some_name' will create a new directory called 'some_name'
 * It will then build out the basic framework in which you can build your application
 
-    rails name_of_application
+    rails new <name_of_application>
+
+* in this case we're going to use "blog"
+
+    rails new blog
+
+* This will create a directory called 'blog' containing a new rails application
 
 === Anatomy of a Rails applicatoin
 
-    app     #=> models, views, controllers, helpers, app logic
+    app     #=> models, views, controllers, helpers, app logic, and assets
     config  #=> database, environment configuration, routes
-    db      #=> migrations, schema.rb
+    db      #=> migrations, schema.rb, database seeds
     doc     #=> a place for your app's documentation
     lib     #=> library files, rake tasks, code that doesn't fit in the app/* folders
     log     #=> log files for all of your environments (prod, dev, test)
-    public  #=> accessable to everyone, images, javascript, stylesheets, static pages
-    script  #=> console, server, generators
+    public  #=> static pages, default rails page, favicon, error pages
+    script  #=> contains the 'rails' command
     spec    #=> rspec tests/specifications and configuration
     test    #=> built in test suite Test::Unit
     tmp     #=> sessions, cache, etc
-    vendor  #=> 3rd party code, plugins, gems, vendored rails
+    vendor  #=> 3rd party code, plugins, gems, and assets
 
 === Basic Anatomy of a Rails Request
 

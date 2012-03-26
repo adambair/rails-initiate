@@ -6,7 +6,7 @@
 # --------------------------
 
 # Delete public/index.html
-# Add 'map.root :controller => 'posts' to config/routes.rb
-# ruby script/server
+# Add "root :to => 'posts#index'"
+# rails server
 # Open http://localhost:3000/ in a browser
-# Verify that '/' shows all of your posts
+# Verify that the default page shows all posts

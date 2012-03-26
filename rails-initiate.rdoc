@@ -157,14 +157,15 @@ rake (Ruby make) is a tool to run 'tasks' such as migrations, tests, etc
 
     rake -T       #=> list all tasks in an application
     rake -T db    #=> list all tasks with 'db' in the name
-    rake -t test  #=> list all tasks with 'test' in the name
+    rake -T test  #=> list all tasks with 'test' in the name
 
 === Console
 * The Rails Console is like irb but within the context of your Rails application
 * You can access any part of your application through the console
 * Execute arbitrary ruby code on the fly just like in irb
+* Extremely useful to sketch out or test ideas
 
-    ruby script/console
+    rails console
     
     Post              #=> List all of the columns in the posts table
 
@@ -179,10 +180,10 @@ rake (Ruby make) is a tool to run 'tasks' such as migrations, tests, etc
                       #=> Will save the object directly to the database
 
     Post.find_by_title('happy')
-                      #=> Finds first post with the title happy
+                      #=> Finds first (single) post with the title happy
 
     Post.find_all_by_title('happy')
-                      #=> Finds all posts with the title happy
+                      #=> Finds all (array) posts with the title happy
 
     Post.destroy_all  #=> Deletes all posts from the database
 
@@ -190,7 +191,7 @@ rake (Ruby make) is a tool to run 'tasks' such as migrations, tests, etc
 * Routes live in config/routes.rb
 * This is where you specify what actions are available for your application
 
-    map.resources :posts
+    resources :posts
     # generate all routes for the posts_controller
     # localhost:3000/posts
 

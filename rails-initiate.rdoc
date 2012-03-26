@@ -57,7 +57,7 @@ Options include:
 * Development 
   - Used by default
   - Heavy verbose logging
-  - Reloads classes each request
+  - Reloads Ruby classes on each request
   - Slower because it's reloading the app so often (to pick up changes)
 
 * Test 
@@ -66,16 +66,16 @@ Options include:
 
 * Production
   - Caches classes, doesn't reload the application per request
-  - Much less logging
+  - Basic and Error logging
   - Fast
 
 * Environments have separate configurations
   - config/environments/development.rb, test.rb, production.rb
   - Each environment has it's own entry in config/database.yml
-  - config/environment.rb is run for every environment
+  - config/application.rb is run for every environment
 
-* You can create your own environments (the defaults are just strong suggestions)
-  - Ofen you'll see an additional environment called 'staging'
+* You can create your own environments (the defaults are conventions)
+  - Often you'll see an additional environment called 'staging'
 
 === Initializers
 * Live in config/initializers/*
@@ -83,9 +83,9 @@ Options include:
 
 === Starting a Rails application
     
-    ruby script/server  #=> start app in dev mode at http://localhost:3000
-    ruby script/server -p 4000 #=> starts the app at http://localhost:4000
-    ruby script/server -e production #=> start the application in production mode
+    rails server  #=> start app in dev mode at http://localhost:3000
+    rails server -p 4000 #=> starts the app at http://localhost:4000
+    rails server -e production #=> start the application in production mode
 
 == Lab 01: Create a Rails Application [ 01_create_a_rails_application.rb ]
 * Use the 'rails' command to create a new application called 'blog'

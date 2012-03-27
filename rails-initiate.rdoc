@@ -276,10 +276,9 @@ Models interact with the database and contain the logic for your application
 * Provide data to your views using instance variables
   - The @ sign denotes an instance variable: @post or @posts for example
   - Keep the number of instance variables to a minimum per request for clarity
-* Protect methods that are not meant to be hit directly from the web with private or protected
 * Session and authentication management happens here in the Controller layer of MVC
 * Anything request driven lives here
-* Keep controllers small by keeping business logic in your models
+* Keep controllers small by moving business logic in your models
 
 === Default actions for RESTFUL Controllers
 * By default you will have 7 actions available
@@ -344,8 +343,8 @@ Models interact with the database and contain the logic for your application
 
   respond_to do |format|
     format.html # will render index.html.erb
-    format.xml  { render :xml => @posts }
-    format.json { render :json => @posts }
+    format.xml  { render xml: @posts }
+    format.json { render json: @posts }
   end
 
 * Please be aware the respond_to blocks are NOT REQUIRED
@@ -356,7 +355,8 @@ Models interact with the database and contain the logic for your application
 * Views are where your markup and ERB live 
 * You should try to keep complexity to a minimum
 * No data logic or munging should happen here
-* keep things dry by moving logic into helpers and repeated markup into helpers
+* keep things DRY by moving logic into helpers and repeated markup into helpers
+* DRY means "Don't Repeat Yourself"
 
 === ERB - embedded Ruby
 * <%  %> and <%= %> are the tags for erb
@@ -370,19 +370,17 @@ Models interact with the database and contain the logic for your application
 * Extract common view logic into re-usable html fragments
 * Partial filenames begin with an underscore: _post.html.erb
 
-  <%= render :partial => 'post', :collection => @posts %>
+  <%= render partial: 'post', collection: @posts %>
   # will render the app/posts/_post.erb partial once for each post in @posts
 
 * You can also pass local variables into the partial
 
-  <%= render :partial => 'comment_fields', :locals => {:f => f } %>
+  <%= render partial: 'comment_fields', locals: {:f => f } %>
   # will make the local form variable 'f' available in the partial
   
-== Lab 06: Extract Post Form Fields [ 06_extract_post_form_fields.rb ]
-* Create a partial that will contain extracted post form fields
-* Extract common form fields from app/views/posts/edit.html.erb and new.html.erb
-* Put the common fields into the partial
-* Make sure that the forms still function
+== Lab 06: Examine Partials and Review [ 06_extract_post_form_fields.rb ]
+* Review the partial in app/views/posts/edit.html.erb and new.html.erb
+* Review the layout of the rails application
 
 === Layouts
 * Layouts are html/erb that wrap each of your views

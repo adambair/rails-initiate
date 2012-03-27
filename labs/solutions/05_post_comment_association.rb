@@ -6,16 +6,12 @@
 # Verify the relationship through the Rails console
 # --------------------------
 
-# ruby script/generate migration add_post_id_to_comments 
-# edit db/migrate/timestamp_add_post_id_to_comments
-# in self.up
+# rails generate migration add_post_id_to_comments 
+# edit db/migrate/<timestamp>_add_post_id_to_comments
+# in change
 
   add_column :comments, :post_id, :integer
  
-# in self.down
-
-  remove_column :comments, :post_id
-
 # rake db:migrate
 # edit app/models/post.rb
 

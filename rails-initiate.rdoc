@@ -240,11 +240,11 @@ Models interact with the database and contain the logic for your application
 * Two halves of a single relationship
 * The belongs_to side of the association is where the foreign key is located
 
-    class Author
+    class Author < ActiveRecord::Base
       has_many :books
     end
 
-    class Book
+    class Book < ActiveRecord::Base
       belongs_to :author
     end
 
@@ -253,11 +253,11 @@ Models interact with the database and contain the logic for your application
 * ActiveRecord assumes that this field exists
 * The x_id assumes that x is the lowercase classname of the relationship ex:
 
-    class Student
+    class Student < ActiveRecord::Base
       has_many :books
     end
 
-    class Book
+    class Book < ActiveRecord::Base
       belongs_to :student
     end
 

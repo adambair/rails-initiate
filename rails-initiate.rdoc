@@ -481,18 +481,11 @@ Models interact with the database and contain the logic for your application
 * Good for quick one-offs
 * Warning: username and password are sent to the server in PLAIN TEXT
     
-    # in app/controllers/applicaiton_controller.rb
-
-    private
-      def authenticate
-        authenticate_or_request_with_http_basic do |user, pass|
-        user == "admin" && pass == "password"
-      end
-
-* You can protect methods by using before_filters in your controllers
+* You can protect actions by using the http_basic_authenticate_with method:
 
     class PostsController < ApplicationController
-      before_filter :authenticate, :only => [:destroy]
+      http_basic_authenticate_with :name => "admin", :password => "password", 
+        :only => "destroy"
 
       def destroy
         # some logic
@@ -501,14 +494,17 @@ Models interact with the database and contain the logic for your application
   
     # this will prompt a user for a username and a password on the destroy action
 
-- For more robust authentication check out these plugins:
-  - Authlogic: http://github.com/binarylogic/authlogic/tree/master
-  - Clearance: http://github.com/thoughtbot/clearance/tree/master
+- For more robust authentication check out omniauth:
+    http://intridea.github.com/omniauth
 
 == Lab 08: Add basic authentication [ 08_add_basic_authentication.rb ]
-* Protect the destroy and edit in the CommentsController with Basic Auth
+* Protect the destroy and edit actions in the CommentsController with Basic Auth
 
 == Additional Topics
+
+=== Rails Asset Pipeline for JS and CSS
+
+  Awesome, yet can be slightly confusing.
 
 === Concepts
 

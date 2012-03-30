@@ -1,0 +1,43 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Title:</b>
+  <%= @post.title %>
+</p>
+
+<p>
+  <b>Body:</b>
+  <%= @post.body %>
+</p>
+
+<h2>Comments</h2>
+<% @post.comments.each do |comment| %>
+  <div class='comment'>
+    <p><%= comment.author %> - Commented <%= distance_of_time_in_words_to_now(comment.created_at) %> ago</p>
+    <p><%= comment.body %></p>
+  </div>
+  <hr/>
+<% end %>
+
+<h3>Add a comment!</h3>
+<%= form_for [@post, Comment.new] do |f| %>
+  <p>
+    <%= f.label :author %><br />
+    <%= f.text_field :author %>
+  </p>
+  <p>
+    <%= f.label :body %><br />
+    <%= f.text_area :body %>
+  </p>
+
+  <%= f.hidden_field :post_id, :value => @post.id %>
+
+  <p>
+    <%= f.submit 'Comment' %>
+  </p>
+<% end %>
+
+
+
+<%= link_to 'Edit', edit_post_path(@post) %> |
+<%= link_to 'Back', posts_path %>

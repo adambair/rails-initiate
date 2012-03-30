@@ -7,7 +7,7 @@
 # - Make sure to update the form to use the proper nested route
 # - Hint: 
 #
-#   <% form_for :comment, :url => post_comments_path(@post) do |f| %>
+#   <%= form_for [@post, Comment.new] do |f| %>
 #
 # Test your comment form to make sure you can add new comments
 # --------------------------

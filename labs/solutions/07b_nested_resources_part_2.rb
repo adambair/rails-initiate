@@ -17,7 +17,7 @@
     <h2>Comments</h2>
     <% @post.comments.each do |comment| %>
       <div class='comment'>
-        <p><%= comment.title %> - Commented <%= distance_of_time_in_words_to_now(comment.created_at) %> ago</p>
+        <p><%= comment.author %> - Commented <%= distance_of_time_in_words_to_now(comment.created_at) %> ago</p>
         <p><%= comment.body %></p>
       </div>
       <hr/>
@@ -26,12 +26,10 @@
 # in app/views/posts/show.html.erb add a comment form
 
     <h3>Add a comment!</h3>
-    <% form_for :comment, :url => post_comments_path(@post) do |f| %>
-      <%= f.error_messages %>
-
+    <%= form_for [@post, Comment.new] do |f| %>
       <p>
         <%= f.label :author %><br />
-        <%= f.text_field :title %>
+        <%= f.text_field :author %>
       </p>
       <p>
         <%= f.label :body %><br />

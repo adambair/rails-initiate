@@ -19,4 +19,5 @@
 #   @comment = @post.comments.find(params[:id])
 #
 # - Change redirects to the PostsController#show action
+#   and in views/comments/*
 # --------------------------

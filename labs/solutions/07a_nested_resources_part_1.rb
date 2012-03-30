@@ -23,10 +23,20 @@
 
 # config/routes.rb
 
-    map.resources :post, :has_many => :comments
+    resources :posts do
+      resources :comments
+    end
 
 # rake routes should include some nested routes 
-# - /posts/:post_id/comments (and so on)
+# see below for example output from "rake routes"
+
+#     post_comments GET    /posts/:post_id/comments(.:format)          comments#index
+#                   POST   /posts/:post_id/comments(.:format)          comments#create
+#  new_post_comment GET    /posts/:post_id/comments/new(.:format)      comments#new
+# edit_post_comment GET    /posts/:post_id/comments/:id/edit(.:format) comments#edit
+#      post_comment GET    /posts/:post_id/comments/:id(.:format)      comments#show
+#                   PUT    /posts/:post_id/comments/:id(.:format)      comments#update
+#                   DELETE /posts/:post_id/comments/:id(.:format)      comments#destroy
 
 # add a before_filter to the CommentsController app/controllers/comments_controller.rb
 

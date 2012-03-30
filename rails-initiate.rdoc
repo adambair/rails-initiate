@@ -385,16 +385,14 @@ Models interact with the database and contain the logic for your application
 === Layouts
 * Layouts are html/erb that wrap each of your views
 * They live in /views/layouts
-* It's common to have only a few layouts for your application
-  - examples: application.html.erb, site.html.erb, admin.html.erb
 
-* Scaffolds create a layout for each scaffold
-  - you should ditch these and build your own application.html.erb
+* It's common to have only a few layouts for your application
+  - examples: application.html.erb (default), site.html.erb, admin.html.erb
 
 * This is also where you include your css and javascript files
 * Include script.aculo.us and prototype
 
-    <%= javascript_include_tag :defaults %>
+    <%= javascript_include_tag :application %>
 
 * You can specify a layout manually in the controller
 
@@ -404,7 +402,7 @@ Models interact with the database and contain the logic for your application
 
 * The default layout is 'app/views/layouts/application.html.erb'
 * Yield is what will display each of your views
-* This is where you can create your headers and footers
+* Layouts are a good place to render you header and footers
 
     <%= render :partial => 'header' %>
     <%= yield %>
@@ -412,14 +410,11 @@ Models interact with the database and contain the logic for your application
 
 === Helpers
 
-* All helpers are available to your views
+* All helpers in app/helpers are available to all of your views
+* The naming convention and separate files is for organization
 
-    # application_controller.rb
-    helper :all
-    # makes all helpers available to all views
-
-* You can extract logic from your views into methods here
-* These are normal ruby methods that you can access from your views
+* You can extract logic from your views into helper methods
+* These are normal ruby methods that are accessable from your views
 
     # Example
     # app/helpers/posts_helper.rb
@@ -436,22 +431,24 @@ Models interact with the database and contain the logic for your application
 * This is where you specify what actions are available for your application
 
     rake routes
-     - display all routes available to your application
+      - display all routes available to your application
 
-    map.resources :posts
+    resources :posts
       - generate all routes for the posts_controller
-        - localhost:3000/posts
+      - localhost:3000/posts
 
-    map.resources :posts, :has_many => :comments
+    resources :posts do
+      resources comments
+    end
       - generate all routes for the posts_controller along with routes for comments
-        - localhost:3000/posts/:id/comments
+      - localhost:3000/posts/:id/comments
 
-    map.root => :controller_name, :action => :action_name
+    root :to => 'controller_name#action_name'
       - change the default route for your application to point at the specified location
       - make sure to delete public/index.html for the root route to be functional
 
 == Lab 07a: Nested Resources Part 1 [ 07a_nested_resources_part_1.rb ]
-* Create a route that reflects the post has_many comments relationship
+* Create a route that reflects the post has nested comments
 * Verify the routes using 'rake routes'
 
 * Nest the CommentsController

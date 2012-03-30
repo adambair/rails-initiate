@@ -653,6 +653,11 @@ Models interact with the database and contain the logic for your application
         person.full_name.should == 'Adam Bair'
       end
     end
+  
+=== Capybara
+* A better Cucumber ;)
+* Programmer friendly integration/front-end testing
+* Plays well with RSpec
 
 === Cucumber 
 * http://www.cukes.info
@@ -679,18 +684,11 @@ Models interact with the database and contain the logic for your application
         | 20 | 30 | add | 50 |
         | 2 | 5 | add | 7 |
         | 0 | 40 | add | 40 |
-  
+
 === FactoryGirl 
 * http://github.com/thoughtbot/factory_girl/tree/master
 * Fixture replacement - an alternative to static fixtures in a YAML file
 * You can build test fixtures on the fly instead of creating them beforehand
-
-=== Metric_fu
-* http://github.com/jscruggs/metric_fu
-* Code metrics for Ruby and Rails projects
-* Test Coverage, code complexity, and general metrics
-* It uses Saikuro, Flog, Flay, Rcov, Reek, Roodi, and Subversion/Git by default
-* Generates graphs that track changes over time
 
 === Heroku
 * http://www.heroku.com
@@ -709,7 +707,7 @@ Models interact with the database and contain the logic for your application
     heroku create
     git push heroku master
 
-=== SASS (Syntatically Awesome Stylesheets)
+=== SASS/SCSS (Syntatically Awesome Stylesheets)
 * http://sass-lang.com
 * A language that compiles down to CSS
 * Adds variables, mixins, functions, and arithmetic 
